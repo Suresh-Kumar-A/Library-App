@@ -37,7 +37,6 @@ public class AppController {
     public ModelAndView viewUsersPage() {
         ModelAndView mv = new ModelAndView("admin/view-users");
         mv.addObject("users", userService.getAllUsers());
-
         return mv;
     }
 

@@ -82,10 +82,63 @@
             </nav>
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Add Book</h1>
-                   
+                <h1 class="h2 mt-1">Add Book</h1>
+                <hr>
+                <div class="row">
+                    <div class="col">
+                        <div class="card bg-light" style="width: 35rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Add Book Form</h5>
+                                <form action="#" class="mt-1">
+                                    <div class="row g-2">
+                                        <div class="col-md">
+                                            <div class="form-floating mb-4">
+                                                <input type="text" class="form-control" id="title"
+                                                    placeholder="Eg: Wings of Fire" autofocus>
+                                                <label for="title">Title</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md">
+                                            <div class="form-floating mb-4">
+                                                <input type="text" class="form-control" id="author"
+                                                    placeholder="Eg: Dr.A.P.J Abdul Kalam">
+                                                <label for="author">Author</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-floating mb-4">
+                                        <textarea class="form-control" placeholder="Good book to read" id="description"
+                                            style="height: 70px"></textarea>
+                                        <label for="description">Description</label>
+                                    </div>
+                                    <div class="row g-2">
+                                        <div class="col-md">
+                                            <div class="form-floating mb-4">
+                                                <select class="form-select" id="avaliablityStatus"
+                                                    aria-label="Avaliablity Status of Book">
+                                                    <option value="1" selected>Avaliable</option>
+                                                    <option value="2">Unavailable</option>
+                                                </select>
+                                                <label for="avaliablityStatus">Availablity Status</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md">
+                                            <div class="form-floating mb-4">
+                                                <input type="text" class="form-control" id="publishedYear"
+                                                    placeholder="Eg: 2005" autofocus>
+                                                <label for="publishedYear">Published Year</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-grid">
+                                        <button class="btn btn-success font-monospace fw-bold text-uppercase"
+                                            type="button" onclick="validateData()">Add Book</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>
@@ -98,7 +151,68 @@
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
         integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
         crossorigin="anonymous"></script>
-    <script src="http://localhost:8080/js/dashboard.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!-- Application Constants | JS -->
+    <script src="../js/app.constants.js"></script>
+    <!-- Custom Form Validation Scripts | JS -->
+    <script src="../js/form.validation.js"></script>
+    <!-- Custom Sweet Alert 2 | JS -->
+    <script src="../js/custom.sweet.alert.js"></script>
+    <script>
+        function disableAddBookButton() {
+            document.getElementsByTagName("button")[0].disabled = true
+        }
+
+        function showAddBookButton() {
+            document.getElementsByTagName("button")[0].disabled = false
+        }
+
+        function validateData() {
+
+            disableAddBookButton()
+            // var username = document.getElementById("username");
+            // var password = document.getElementById("password");
+            // var email = document.getElementById("email-address");
+
+            // username.classList.remove("is-valid", "is-invalid");
+            // email.classList.remove("is-valid", "is-invalid");
+            // password.classList.remove("is-valid", "is-invalid");
+
+
+            // if (validateUsername(username.value))
+            //     username.classList.add("is-valid")
+            // else {
+            //     username.classList.add("is-invalid")
+            //     showAddBookButton()
+            //     return;
+            // }
+
+
+
+            // // Continue with Account Creation
+            // var user = {};
+            // user.username = username.value;
+            // user.email = email.value;
+            // user.password = password.value;
+
+            // const postRequestOptions = {
+            //     method: 'POST',
+            //     headers: new Headers({ 'content-type': 'application/json' }),
+            //     body: JSON.stringify(user)
+            // };
+            // fetch(apiServerUrl + "/create-account", postRequestOptions)
+            //     .then(response => response.json())
+            //     .then((data) => {
+            //         console.log(data);
+            //         showTopSuccessNotificationWithMessageAndAutoReload("Account Created Successfully")
+            //     })
+            //     .catch(() => {
+            //         console.error("unable to fetch users list");
+            //         showTopErrorNotificationWithMessage("Unable to create account. Try again")
+            //     })
+        }
+    </script>
 </body>
 
 </html>
