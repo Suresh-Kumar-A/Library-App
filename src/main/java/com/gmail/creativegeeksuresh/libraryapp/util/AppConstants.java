@@ -25,48 +25,48 @@ public class AppConstants {
 
         static {
                 DEFAULT_DATA_LIST = new ArrayList<>();
-                BookDto BookDto1 = new BookDto();
-                BookDto1.setTitle("Wings of Fire");
-                BookDto1.setAuthor("Dr. APJ Kalam");
-                BookDto1.setDescription("Good BookDto for youngsters");
-                BookDto1.setAvailable(Boolean.TRUE);
-                BookDto1.setPublishedYear(Year.parse("1999"));
+                BookDto bookDto1 = new BookDto();
+                bookDto1.setTitle("Wings of Fire");
+                bookDto1.setAuthor("Dr. APJ Kalam");
+                bookDto1.setDescription("Good BookDto for youngsters");
+                bookDto1.setAvailable(Boolean.TRUE);
+                bookDto1.setPublishedYear(Year.parse("1999"));
 
-                BookDto BookDto2 = new BookDto();
-                BookDto2.setTitle("Steve Jobs");
-                BookDto2.setAuthor("Steve Jobs");
-                BookDto2.setDescription("Steve Jobs is the authorized self-titled biography of Steve Jobs.");
-                BookDto2.setAvailable(Boolean.TRUE);
-                BookDto2.setPublishedYear(Year.parse("2015"));
+                BookDto bookDto2 = new BookDto();
+                bookDto2.setTitle("Steve Jobs");
+                bookDto2.setAuthor("Steve Jobs");
+                bookDto2.setDescription("Steve Jobs is the authorized self-titled biography of Steve Jobs.");
+                bookDto2.setAvailable(Boolean.TRUE);
+                bookDto2.setPublishedYear(Year.parse("2015"));
 
-                BookDto BookDto3 = new BookDto();
-                BookDto3.setTitle("The Story of My Experiments with Truth");
-                BookDto3.setAuthor("Mohandas Karamchand Gandhi");
-                BookDto3.setDescription(
+                BookDto bookDto3 = new BookDto();
+                bookDto3.setTitle("The Story of My Experiments with Truth");
+                bookDto3.setAuthor("Mohandas Karamchand Gandhi");
+                bookDto3.setDescription(
                                 "The Story of My Experiments with Truth is the autobiography of Mohandas K. Gandhi");
-                BookDto3.setAvailable(Boolean.FALSE);
-                BookDto3.setPublishedYear(Year.parse("1948"));
+                bookDto3.setAvailable(Boolean.FALSE);
+                bookDto3.setPublishedYear(Year.parse("1948"));
 
-                BookDto BookDto4 = new BookDto();
-                BookDto4.setTitle("A Promised Land");
-                BookDto4.setAuthor("Barack Obama");
-                BookDto4.setDescription(
+                BookDto bookDto4 = new BookDto();
+                bookDto4.setTitle("A Promised Land");
+                bookDto4.setAuthor("Barack Obama");
+                bookDto4.setDescription(
                                 "A Promised Land is a memoir by Barack Obama, the 44th President of the United States from 2009 to 2017");
-                BookDto4.setAvailable(Boolean.FALSE);
-                BookDto4.setPublishedYear(Year.parse("2009"));
+                bookDto4.setAvailable(Boolean.FALSE);
+                bookDto4.setPublishedYear(Year.parse("2009"));
 
-                BookDto BookDto5 = new BookDto();
-                BookDto5.setTitle("I Am Malala");
-                BookDto5.setAuthor("Malala Yousafzai");
-                BookDto5.setDescription(
+                BookDto bookDto5 = new BookDto();
+                bookDto5.setTitle("I Am Malala");
+                bookDto5.setAuthor("Malala Yousafzai");
+                bookDto5.setDescription(
                                 "The Story of the Girl Who Stood Up for Education and was Shot by the Taliban is an autobiographical BookDto by Malala Yousafzai");
-                BookDto5.setAvailable(Boolean.TRUE);
-                BookDto5.setPublishedYear(Year.parse("2013"));
+                bookDto5.setAvailable(Boolean.TRUE);
+                bookDto5.setPublishedYear(Year.parse("2013"));
 
-                DEFAULT_DATA_LIST.add(BookDto1);
-                DEFAULT_DATA_LIST.add(BookDto2);
-                DEFAULT_DATA_LIST.add(BookDto3);
-                DEFAULT_DATA_LIST.add(BookDto4);
-                DEFAULT_DATA_LIST.add(BookDto5);
+                DEFAULT_DATA_LIST.add(bookDto1);
+                DEFAULT_DATA_LIST.add(bookDto2);
+                DEFAULT_DATA_LIST.add(bookDto3);
+                DEFAULT_DATA_LIST.add(bookDto4);
+                DEFAULT_DATA_LIST.add(bookDto5);
         }
 }
