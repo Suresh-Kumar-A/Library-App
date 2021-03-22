@@ -1,6 +1,7 @@
 package com.gmail.creativegeeksuresh.libraryapp;
 
 import com.gmail.creativegeeksuresh.libraryapp.model.Role;
+import com.gmail.creativegeeksuresh.libraryapp.service.BookService;
 import com.gmail.creativegeeksuresh.libraryapp.service.RoleService;
 import com.gmail.creativegeeksuresh.libraryapp.service.UserService;
 import com.gmail.creativegeeksuresh.libraryapp.util.AppConstants;
@@ -29,6 +30,9 @@ public class LibraryAppApplication implements CommandLineRunner {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	BookService bookService;
+
 	public static void main(String[] args) {
 		SpringApplication.run(LibraryAppApplication.class, args);
 	}
@@ -51,9 +55,17 @@ public class LibraryAppApplication implements CommandLineRunner {
 			}
 
 			userService.createAdminUser(adminUsername, adminPassword, adminEmail);
-			
 
 			// Creating default Book set
+			AppConstants.DEFAULT_DATA_LIST.forEach(book -> {
+				try {
+					bookService.addBook(book);
+				} catch (Exception e) {
+					System.err.println(e.getLocalizedMessage());
+					e.printStackTrace();
+				}
+			});
+
 		} catch (Exception e) {
 			System.err.println(e.getLocalizedMessage());
 		}

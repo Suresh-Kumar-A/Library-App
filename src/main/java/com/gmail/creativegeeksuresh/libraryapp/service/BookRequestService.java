@@ -1,5 +1,8 @@
 package com.gmail.creativegeeksuresh.libraryapp.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.gmail.creativegeeksuresh.libraryapp.dto.BookRequestDto;
 import com.gmail.creativegeeksuresh.libraryapp.exception.InvalidBookException;
 import com.gmail.creativegeeksuresh.libraryapp.model.Book;
@@ -44,5 +47,14 @@ public class BookRequestService {
     public void updateBookAvailablityAndDeleteRequest(String bookId) throws Exception {
         bookService.updateBookAvailablity(bookId, Boolean.TRUE);
         deleteRequest(bookId);
+    }
+
+    public List<BookRequest> getAllBooks() {
+        try {
+            return (List<BookRequest>) bookRequestRepo.findAll();
+        } catch (Exception e) {
+            System.err.println(e.getLocalizedMessage());
+            return new ArrayList<>();
+        }
     }
 }

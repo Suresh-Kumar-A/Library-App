@@ -3,6 +3,7 @@ package com.gmail.creativegeeksuresh.libraryapp.controller;
 import java.util.HashMap;
 
 import com.gmail.creativegeeksuresh.libraryapp.dto.BookDto;
+import com.gmail.creativegeeksuresh.libraryapp.dto.BookRequestDto;
 import com.gmail.creativegeeksuresh.libraryapp.dto.UserDto;
 import com.gmail.creativegeeksuresh.libraryapp.exception.UserAlreadyExistsException;
 import com.gmail.creativegeeksuresh.libraryapp.service.BookRequestService;
@@ -85,7 +86,6 @@ public class ApiController {
         }
     }
 
-
     @GetMapping(value = "/get-all-books")
     public ResponseEntity<?> getAllBooks() {
         try {
@@ -96,10 +96,37 @@ public class ApiController {
         }
     }
 
+    @PostMapping(value = "/user/add-book-request")
+    public ResponseEntity<?> addBookAcessRequest(@RequestBody BookRequestDto request) {
+        try {
+            return new ResponseEntity<>(bookRequestService.createRequest(request), HttpStatus.CREATED);
+        } catch (UserAlreadyExistsException uaex) {
+            System.err.println(uaex.getLocalizedMessage());
+            return new ResponseEntity<>(uaex.getLocalizedMessage(), HttpStatus.CONFLICT);
+        } catch (Exception ex) {
+            System.err.println(ex.getLocalizedMessage());
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @PostMapping(value = "/admin/delete-book")
     public ResponseEntity<?> deleteBookAccount(@RequestParam String uid) {
         try {
             bookService.deleteBookByUid(uid);
+            return new ResponseEntity<>(new HashMap<>(), HttpStatus.OK);
+        } catch (UserAlreadyExistsException uaex) {
+            System.err.println(uaex.getLocalizedMessage());
+            return new ResponseEntity<>(uaex.getLocalizedMessage(), HttpStatus.CONFLICT);
+        } catch (Exception ex) {
+            System.err.println(ex.getLocalizedMessage());
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping(value = "/admin/allow-book-access")
+    public ResponseEntity<?> allowBookAccess(@RequestParam String uid) {
+        try {
+            bookRequestService.updateBookAvailablityAndDeleteRequest(uid);
             return new ResponseEntity<>(new HashMap<>(), HttpStatus.OK);
         } catch (UserAlreadyExistsException uaex) {
             System.err.println(uaex.getLocalizedMessage());

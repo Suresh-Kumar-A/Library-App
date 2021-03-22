@@ -8,6 +8,8 @@ import java.util.Date;
 import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +34,21 @@ public class CustomUtils {
         messageDigest.update((dateFormat.format(date).toString() + String.valueOf(Math.random())).getBytes());
         byte[] digiest = messageDigest.digest();
         return DatatypeConverter.printHexBinary(digiest);
+    }
+
+    public final String getUsername() {
+        try {
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+            if (principal instanceof UserDetails) {
+                return ((UserDetails) principal).getUsername();
+            } else {
+                return principal.toString();
+            }
+
+        } catch (Exception e) {
+            System.err.println(e.getLocalizedMessage());
+            return "";
+        }
     }
 }

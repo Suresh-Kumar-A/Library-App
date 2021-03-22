@@ -1,6 +1,8 @@
 package com.gmail.creativegeeksuresh.libraryapp.controller;
 
+import com.gmail.creativegeeksuresh.libraryapp.service.BookRequestService;
 import com.gmail.creativegeeksuresh.libraryapp.service.BookService;
+import com.gmail.creativegeeksuresh.libraryapp.service.CustomUtils;
 import com.gmail.creativegeeksuresh.libraryapp.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,13 @@ public class AppController {
     @Autowired
     BookService bookService;
 
+    @Autowired
+    CustomUtils customUtils;
+    
+    @Autowired
+    BookRequestService bookRequestService;
+
+
     @GetMapping(value = { "/", "/login" })
     public ModelAndView signInPage() {
         return new ModelAndView("sign-in");
@@ -31,49 +40,61 @@ public class AppController {
     @GetMapping(value = "/user/view-books")
     public ModelAndView viewBooksUserPage() {
         ModelAndView mv = new ModelAndView("user/view-books");
+        mv.addObject("username", customUtils.getUsername());
         return mv;
     }
 
     @GetMapping(value = "/admin/dashboard")
     public ModelAndView adminDashboardPage() {
-        return new ModelAndView("admin/dashboard");
+        ModelAndView mv = new ModelAndView("admin/dashboard");
+        mv.addObject("username", customUtils.getUsername());
+        return mv;
     }
 
     @GetMapping(value = "/admin/view-users")
     public ModelAndView viewUsersPage() {
         ModelAndView mv = new ModelAndView("admin/view-users");
         mv.addObject("users", userService.getAllUsers());
+        mv.addObject("username", customUtils.getUsername());
         return mv;
     }
 
     @GetMapping(value = "/admin/view-books")
     public ModelAndView viewBooksPage() {
         ModelAndView mv = new ModelAndView("admin/view-books");
-        // mv.addObject("books", bookService.getAllBooks());
+        mv.addObject("username", customUtils.getUsername());
         return mv;
     }
 
     @GetMapping(value = "/admin/add-book")
     public ModelAndView addBookPage() {
-        return new ModelAndView("admin/add-book");
+        ModelAndView mv = new ModelAndView("admin/add-book");
+        mv.addObject("username", customUtils.getUsername());
+        return mv;
     }
 
     @GetMapping(value = "/admin/edit-book")
     public ModelAndView editBookPage(@RequestParam String uid) {
         ModelAndView mv = new ModelAndView("admin/edit-book");
         mv.addObject("book", bookService.findByUid(uid));
+        mv.addObject("username", customUtils.getUsername());
         return mv;
     }
 
     @GetMapping(value = "/admin/unavailable-books")
     public ModelAndView unavailableBooksPage() {
-        ModelAndView mv =new ModelAndView("admin/unavailable-books");
+        ModelAndView mv = new ModelAndView("admin/unavailable-books");
         mv.addObject("books", bookService.getAllUnavilableBooks());
+        mv.addObject("username", customUtils.getUsername());
         return mv;
     }
 
     @GetMapping(value = "/admin/users-book-request")
     public ModelAndView usersBookRequestPage() {
-        return new ModelAndView("admin/users-book-request");
+        ModelAndView mv = new ModelAndView("admin/users-book-request");
+        mv.addObject("username", customUtils.getUsername());
+        mv.addObject("requestList", bookRequestService.getAllBooks());
+        return mv;
+
     }
 }

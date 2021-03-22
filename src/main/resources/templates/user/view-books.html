@@ -23,7 +23,7 @@
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <h5 class="text-light">Welcome, <span class="mx-2">sureshkumar.a</span></h5>
+        <h5 class="text-light">Welcome, <span class="mx-2" th:text="${username}"></span></h5>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <a class="nav-link fw-bold text-danger" href="/logout">
@@ -52,47 +52,9 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <h1 class="h2 mt-1">View Books || User</h1>
                 <hr>
-                <div class="row">
-                    <div class="col">
-                        <table class="table table-bordered caption-top table-hover" id="bookListTable">
-                            <caption>List of books</caption>
-                            <thead class="bg-light">
-                                <tr>
-                                    <th>#</th>
-                                    <th><span data-feather="book"></span> Title</th>
-                                    <th><span data-feather="at-sign"></span> Author</th>
-                                    <th><span data-feather="eye"></span> Availablity</th>
-                                    <th><span data-feather="calendar"></span> Published Year</th>
-                                    <th><span data-feather="activity"></span> Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                <input type="hidden" name="username" id="username" th:value="${username}">
+                <div class="row row-cols-1 row-cols-md-3 g-4" id="booksCardRow">
 
-                            </tbody>
-                            <!-- <tbody th:each="book,loop : ${books}">
-                                <tr>
-                                    <td th:text="${loop.count}"></td>
-                                    <td th:text="${book.title}"></td>
-                                    <td th:text="${book.author}"></td>
-                                    <td>
-                                        <span class="badge bg-info" th:if="${book.available}">Available</span>
-                                        <span class="badge bg-secondary"
-                                            th:unless="${book.available}">Unavailable</span>
-                                    </td>
-                                    <td th:text="${book.publishedYear}"></td>
-                                    <td>
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="button" class="btn btn-primary btn-sm"><span
-                                                    data-feather="edit-3"></span> Edit</button>
-                                            <button type="button" class="btn btn-danger btn-sm"
-                                                th:attr="onclick=|deleteBook('${book.uid}')|"><span
-                                                    data-feather="trash-2"></span> Delete</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody> -->
-                        </table>
-                    </div>
                 </div>
             </main>
         </div>
@@ -115,21 +77,6 @@
     <!-- Custom Sweet Alert 2 | JS -->
     <script src="../js/custom.sweet.alert.js"></script>
     <script>
-
-        function deleteBook(uid) {
-            const postRequestOptions = {
-                method: 'POST'
-            };
-            fetch(apiServerUrl + "/admin/delete-book?uid=" + uid, postRequestOptions)
-                .then(response => response.json())
-                .then((data) => {
-                    showTopSuccessNotificationWithMessageAndAutoReload("Book Deleted successfully")
-                })
-                .catch(() => {
-                    showTopErrorNotificationWithMessage("Unable to delete book. Try again")
-                })
-        }
-
         function getAllBooks() {
             const getRequestOptions = {
                 method: 'GET'
@@ -138,7 +85,7 @@
                 .then(response => response.json())
                 .then((data) => {
                     console.log(data)
-                    parseDataToTable(data);
+                    parseDataToCards(data);
                     // showTopSuccessNotificationWithMessageAndAutoReload("Book Deleted successfully")
                 })
                 .catch(() => {
@@ -146,37 +93,79 @@
                 })
         }
 
-        function parseDataToTable(books) {
-
-            var tableRef = document.getElementsByTagName("table")[0].tBodies[0]
+        function parseDataToCards(books) {
 
             books.forEach(function (book, index) {
-                var sno;
-                var title;
-                var author;
-                var availablity;
-                var publishedYear;
-                var actions;
-                sno = `<td>${index + 1}</td>`
-                title = `<td>${book.title}</td>`
-                author = `<td>${book.author}</td>`
-                publishedYear = `<td>${book.publishedYear}</td>`
+                var card;
                 if (book.available) {
-                    availablity = `<td><span class="badge bg-info">Available</span></td>`
+                    card = availableBookCard(book)
                 } else {
-                    availablity = `<td><span class="badge bg-secondary">Unavailable</span></td>`
+                    card = unavilableBookCard(book)
                 }
-
-                actions = `<td><div class="btn-group" role="group" aria-label="Admin Operations">
-                            <a href="${serverUrl + "/admin/edit-book?uid=" + book.uid}" class="btn btn-primary btn-sm"><span data-feather="edit-3"></span> Edit</a>
-                            <button type="button" class="btn btn-danger btn-sm" onclick="deleteBook('${book.uid}')"><span data-feather="trash-2"></span> Delete</button>
-                            </div></td>`;
-                $("#bookListTable tbody").append(`<tr>${sno + title + author + availablity + publishedYear + actions}</tr>`);
+                $("#booksCardRow").append(card);
             });
 
         }
-        getAllBooks()
 
+        function availableBookCard(book) {
+            return `<div class="col">
+                        <div class="card mb-3" style="max-width: 600px;">
+                            <div class="row g-0">
+                                <div class="col-md-5">
+                                    <img src="../images/book-open.svg" class="card-img-top" alt="available_img">
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${book.title}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">${book.author}</h6>
+                                        <p class="card-text">${book.description}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`
+        }
+        function unavilableBookCard(book) {
+            return ` <div class="col">
+                        <div class="card mb-3" style="max-width: 600px;">
+                            <div class="row g-0">
+                                <div class="col-md-5">
+                                    <img src="../images/lock.svg" class="card-img-top" alt="unavailable_img">
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${book.title}</h5>
+                                        <button type="button" class="btn btn-secondary" onclick="requestBookAccess('${book.title}','${book.uid}')">Request Access</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`
+        }
+
+        function requestBookAccess(title,uid) {
+            var username= document.getElementById("username").value
+            var request = {};
+            request.title = title
+            request.bookId = uid
+            request.requestedBy = username
+
+            const postRequestOptions = {
+                method: 'POST',
+                headers: new Headers({ 'content-type': 'application/json' }),
+                body: JSON.stringify(request)
+            };
+            fetch(apiServerUrl + "/user/add-book-request", postRequestOptions)
+                .then(response => response.json())
+                .then((data) => {
+                    showTopSuccessNotificationWithMessageAndAutoReload("Book Acess Requested")
+                })
+                .catch(() => {
+                    showTopErrorNotificationWithMessage("Unable to request access to book. Try again")
+                })
+        }
+
+        getAllBooks()
     </script>
 </body>
 
