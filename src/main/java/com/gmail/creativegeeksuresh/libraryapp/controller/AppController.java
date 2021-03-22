@@ -6,6 +6,7 @@ import com.gmail.creativegeeksuresh.libraryapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -56,9 +57,18 @@ public class AppController {
         return new ModelAndView("admin/add-book");
     }
 
+    @GetMapping(value = "/admin/edit-book")
+    public ModelAndView editBookPage(@RequestParam String uid) {
+        ModelAndView mv = new ModelAndView("admin/edit-book");
+        mv.addObject("book", bookService.findByUid(uid));
+        return mv;
+    }
+
     @GetMapping(value = "/admin/unavailable-books")
     public ModelAndView unavailableBooksPage() {
-        return new ModelAndView("admin/unavailable-books");
+        ModelAndView mv =new ModelAndView("admin/unavailable-books");
+        mv.addObject("books", bookService.getAllUnavilableBooks());
+        return mv;
     }
 
     @GetMapping(value = "/admin/users-book-request")

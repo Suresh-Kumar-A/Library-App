@@ -86,7 +86,7 @@
                 <hr>
                 <div class="row">
                     <div class="col">
-                        <table class="table table-bordered caption-top table-hover">
+                        <table class="table table-bordered caption-top table-hover" id="bookListTable">
                             <caption>List of books</caption>
                             <thead class="bg-light">
                                 <tr>
@@ -137,6 +137,9 @@
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
         integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
         crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
     <script src="../js/dashboard.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <!-- Application Constants | JS -->
@@ -144,6 +147,7 @@
     <!-- Custom Sweet Alert 2 | JS -->
     <script src="../js/custom.sweet.alert.js"></script>
     <script>
+
         function deleteBook(uid) {
             const postRequestOptions = {
                 method: 'POST'
@@ -165,6 +169,7 @@
             fetch(apiServerUrl + "/get-all-books", getRequestOptions)
                 .then(response => response.json())
                 .then((data) => {
+                    console.log(data)
                     parseDataToTable(data);
                     // showTopSuccessNotificationWithMessageAndAutoReload("Book Deleted successfully")
                 })
@@ -175,35 +180,59 @@
 
         function parseDataToTable(books) {
 
-            var tableBody = document.getElementsByTagName("table")[0].tBodies
+            var tableRef = document.getElementsByTagName("table")[0].tBodies[0]
 
-            tableBody.item(0).insertRow()
+            books.forEach(function (book, index) {
+                // var newRow = tableRef.insertRow(0);
+                // var sno = newRow.insertCell(0)
+                // var title = newRow.insertCell(1)
+                // var author = newRow.insertCell(2)
+                // var availablity = newRow.insertCell(3)
+                // var publishedYear = newRow.insertCell(4)
+                // var actions = newRow.insertCell(5)
+                var sno;
+                var title;
+                var author;
+                var availablity;
+                var publishedYear;
+                var actions;
 
-            tableBody.tBodies.item(0).rows.length
-            tableBody.tBodies.item(0).rows[4].insertCell(0)
-            tableBody.tBodies.item(0).rows[3].cells[2].innerHTML = `<button> helo</button>`
+                // sno= (index + 1)
+                // title.innerText = book.title
+                // author.innerText = book.author
+                // publishedYear.innerText = book.publishedYear
+                // if (book.available) {
+                //     availablity.innerHTML = `<span class="badge bg-info">Available</span>`
+                // } else {
+                //     availablity.innerHTML = `<span class="badge bg-secondary">Unavailable</span>`
+                // }
 
-            var myHtmlContent = "<h3>hello</h3>"
-            var tableRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+                // actions.innerHTML = `<div class="btn-group" role="group" aria-label="Admin Operations">
+                //                             <button type="button" class="btn btn-primary btn-sm"><span data-feather="edit-3"></span> Edit</button>
+                //                             <button type="button" class="btn btn-danger btn-sm"><span data-feather="trash-2"></span> Delete</button>
+                //                             </div>`;
 
-            var newRow = tableRef.insertRow(tableRef.rows.length);
-            newRow.innerHTML = myHtmlContent;
+                sno = `<td>${index + 1}</td>`
+                title = `<td>${book.title}</td>`
+                author = `<td>${book.author}</td>`
+                publishedYear = `<td>${book.publishedYear}</td>`
+                if (book.available) {
+                    availablity = `<td><span class="badge bg-info">Available</span></td>`
+                } else {
+                    availablity = `<td><span class="badge bg-secondary">Unavailable</span></td>`
+                }
 
-            // Find a <table> element with id="myTable":
-var table = document.getElementById("myTable");
+                actions = `<td><div class="btn-group" role="group" aria-label="Admin Operations">
+                            <a href="${serverUrl + "/admin/edit-book?uid=" + book.uid}" class="btn btn-primary btn-sm"><span data-feather="edit-3"></span> Edit</a>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="deleteBook('${book.uid}')"><span data-feather="trash-2"></span> Delete</button>
+                            </div></td>`;
+                $("#bookListTable tbody").append(`<tr>${sno + title + author + availablity + publishedYear + actions}</tr>`);
+            });
 
-// Create an empty <tr> element and add it to the 1st position of the table:
-var row = table.insertRow(0);
 
-// Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
-var cell1 = row.insertCell(0);
-var cell2 = row.insertCell(1);
 
-// Add some text to the new cells:
-cell1.innerHTML = "NEW CELL1";
-cell2.innerHTML = "NEW CELL2";
         }
-
+        getAllBooks()
 
     </script>
 </body>

@@ -86,7 +86,7 @@ public class BookService {
         }
     }
 
-    public Book findByUid(String bookId) {
-        return bookRepo.findByUid(bookId);
+    public Book findByUid(String uid) {
+        return bookRepo.findByUid(uid);
     }
 }

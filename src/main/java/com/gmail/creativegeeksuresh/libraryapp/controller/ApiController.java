@@ -72,6 +72,20 @@ public class ApiController {
         }
     }
 
+    @PostMapping(value = "/admin/update-book")
+    public ResponseEntity<?> updateBookEntry(@RequestBody BookDto request) {
+        try {
+            return new ResponseEntity<>(bookService.updateBook(request), HttpStatus.OK);
+        } catch (UserAlreadyExistsException uaex) {
+            System.err.println(uaex.getLocalizedMessage());
+            return new ResponseEntity<>(uaex.getLocalizedMessage(), HttpStatus.CONFLICT);
+        } catch (Exception ex) {
+            System.err.println(ex.getLocalizedMessage());
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
     @GetMapping(value = "/get-all-books")
     public ResponseEntity<?> getAllBooks() {
         try {
