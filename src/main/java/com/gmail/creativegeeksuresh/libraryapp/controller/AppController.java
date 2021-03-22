@@ -28,9 +28,10 @@ public class AppController {
         return new ModelAndView("create-account");
     }
 
-    @GetMapping(value = "/user/dashboard")
-    public ModelAndView userDashboardPage() {
-        return new ModelAndView("user/dashboard");
+    @GetMapping(value = "/user/view-books")
+    public ModelAndView viewBooksUserPage() {
+        ModelAndView mv = new ModelAndView("user/view-books");
+        return mv;
     }
 
     @GetMapping(value = "/admin/dashboard")

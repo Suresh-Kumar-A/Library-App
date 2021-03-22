@@ -28,7 +28,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>(auth.getAuthorities());
         if ((!(auth instanceof AnonymousAuthenticationToken))
                 && authorities.get(0).getAuthority().equals(AppConstants.ROLE_STRING + AppConstants.USER_ROLE_STRING)) {
-            response.sendRedirect(request.getContextPath() + "/user/dashboard");
+            response.sendRedirect(request.getContextPath() + "/user/view-books");
         } else {
             response.sendRedirect(request.getContextPath() + "/login?access-denied");
         }
