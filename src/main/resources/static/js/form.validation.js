@@ -1,19 +1,6 @@
-//  Functions to validate Form Fields
 /*
  * author Suresh
  */
-//assining valid-invalid classes
-function assignTagStatus(inputid, type) {
-    //making valid input in green outline
-    if (type === true) {
-        $(inputid).removeClass("is-invalid");
-        $(inputid).addClass("is-valid");
-    } else { //making in-valid input in green outline
-        $(inputid).removeClass("is-valid");
-        $(inputid).addClass("is-invalid");
-    }
-}
-
 // FORM Validation Functions //
 function startWithAlphabet(inputdata) {
     return /^[A-Za-z]/.test(inputdata); //true - if start with alphabet
@@ -75,3 +62,10 @@ function validatePassword(inputdata) { //Password length must be from 3-15
         return false;
 }
 
+function validateName(inputdata){
+    if(inputdata.length==0){
+        return false;
+    }else{
+        return (/^([A-Za-z])(?=.*[ .?][a-zA-Z])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z]).{1,25}$/.test(inputdata))
+    }
+}

@@ -81,4 +81,18 @@ public class ApiController {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
+
+    @PostMapping(value = "/admin/delete-book")
+    public ResponseEntity<?> deleteBookAccount(@RequestParam String uid) {
+        try {
+            bookService.deleteBookByUid(uid);
+            return new ResponseEntity<>(new HashMap<>(), HttpStatus.OK);
+        } catch (UserAlreadyExistsException uaex) {
+            System.err.println(uaex.getLocalizedMessage());
+            return new ResponseEntity<>(uaex.getLocalizedMessage(), HttpStatus.CONFLICT);
+        } catch (Exception ex) {
+            System.err.println(ex.getLocalizedMessage());
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
 }

@@ -57,7 +57,7 @@ public class CustomConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/admin/**").hasRole(AppConstants.ADMIN_ROLE_STRING)
                 .antMatchers("/user/**").hasAnyRole(AppConstants.USER_ROLE_STRING, AppConstants.ADMIN_ROLE_STRING)
-                .antMatchers("/", "/login", "/create-account", "/api/v1/create-account").permitAll().anyRequest()
+                .antMatchers("/", "/login", "/create-account", "/api/v1/create-account","/api/v1/**").permitAll().anyRequest()
                 .authenticated().and().csrf().disable().formLogin().loginPage("/login").permitAll()
                 .usernameParameter("username").passwordParameter("password").successHandler(authSuccessHandler)
                 .failureUrl("/login?accessdenied").and().logout().invalidateHttpSession(true)

@@ -1,5 +1,6 @@
 package com.gmail.creativegeeksuresh.libraryapp.controller;
 
+import com.gmail.creativegeeksuresh.libraryapp.service.BookService;
 import com.gmail.creativegeeksuresh.libraryapp.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,9 @@ public class AppController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    BookService bookService;
 
     @GetMapping(value = { "/", "/login" })
     public ModelAndView signInPage() {
@@ -42,7 +46,9 @@ public class AppController {
 
     @GetMapping(value = "/admin/view-books")
     public ModelAndView viewBooksPage() {
-        return new ModelAndView("admin/view-books");
+        ModelAndView mv = new ModelAndView("admin/view-books");
+        // mv.addObject("books", bookService.getAllBooks());
+        return mv;
     }
 
     @GetMapping(value = "/admin/add-book")

@@ -125,7 +125,7 @@
                                         <div class="col-md">
                                             <div class="form-floating mb-4">
                                                 <input type="text" class="form-control" id="publishedYear"
-                                                    placeholder="Eg: 2005" autofocus>
+                                                    placeholder="Eg: 2005">
                                                 <label for="publishedYear">Published Year</label>
                                             </div>
                                         </div>
@@ -171,46 +171,64 @@
         function validateData() {
 
             disableAddBookButton()
-            // var username = document.getElementById("username");
-            // var password = document.getElementById("password");
-            // var email = document.getElementById("email-address");
+            var title = document.getElementById("title");
+            var author = document.getElementById("author");
+            var avaliablityStatus = document.getElementById("avaliablityStatus");
+            var publishedYear = document.getElementById("publishedYear");
 
-            // username.classList.remove("is-valid", "is-invalid");
-            // email.classList.remove("is-valid", "is-invalid");
-            // password.classList.remove("is-valid", "is-invalid");
+            title.classList.remove("is-valid", "is-invalid");
+            author.classList.remove("is-valid", "is-invalid");
+            avaliablityStatus.classList.remove("is-valid", "is-invalid");
+            publishedYear.classList.remove("is-valid", "is-invalid");
 
+            if (startWithAlphabet(title.value)) {
+                title.classList.add("is-valid")
+            } else {
+                title.classList.add("is-invalid")
+                showAddBookButton()
+                return;
+            }
 
-            // if (validateUsername(username.value))
-            //     username.classList.add("is-valid")
-            // else {
-            //     username.classList.add("is-invalid")
-            //     showAddBookButton()
-            //     return;
-            // }
+            if (startWithAlphabet(author.value)) {
+                author.classList.add("is-valid")
+            } else {
+                author.classList.add("is-invalid")
+                showAddBookButton()
+                return;
+            }
 
+            if (onlyNumber(publishedYear.value)) {
+                publishedYear.classList.add("is-valid")
+            } else {
+                publishedYear.classList.add("is-invalid")
+                showAddBookButton()
+                return;
+            }
 
+            avaliablityStatus.classList.add("is-valid")
 
-            // // Continue with Account Creation
-            // var user = {};
-            // user.username = username.value;
-            // user.email = email.value;
-            // user.password = password.value;
+            // // Continue with Object Creation
+            var book = {};
+            book.title = title.value;
+            book.author = author.value;
+            book.description = description.value;
+            book.available = (avaliablityStatus.selectedIndex === 0) ? true : false;
+            book.publishedYear = publishedYear.value;
 
-            // const postRequestOptions = {
-            //     method: 'POST',
-            //     headers: new Headers({ 'content-type': 'application/json' }),
-            //     body: JSON.stringify(user)
-            // };
-            // fetch(apiServerUrl + "/create-account", postRequestOptions)
-            //     .then(response => response.json())
-            //     .then((data) => {
-            //         console.log(data);
-            //         showTopSuccessNotificationWithMessageAndAutoReload("Account Created Successfully")
-            //     })
-            //     .catch(() => {
-            //         console.error("unable to fetch users list");
-            //         showTopErrorNotificationWithMessage("Unable to create account. Try again")
-            //     })
+            const postRequestOptions = {
+                method: 'POST',
+                headers: new Headers({ 'content-type': 'application/json' }),
+                body: JSON.stringify(book)
+            };
+            fetch(apiServerUrl + "/admin/add-book", postRequestOptions)
+                .then(response => response.json())
+                .then((data) => {
+                    console.log(data);
+                    showTopSuccessNotificationWithMessageAndAutoReload("Book added Successfully")
+                })
+                .catch(() => {
+                    showTopErrorNotificationWithMessage("Unable to add book. Try again")
+                })
         }
     </script>
 </body>
