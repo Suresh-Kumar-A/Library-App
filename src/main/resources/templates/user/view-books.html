@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Unavailable Books | LibraryApp</title>
+    <title>View Books | LibraryApp</title>
 
     <!-- Bootstrap | CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -40,41 +40,9 @@
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/admin/dashboard">
-                                <span data-feather="home"></span>
-                                Dashboard
-                            </a>
-                        </li>
-                        <hr>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/view-users">
-                                <span data-feather="users"></span>
-                                View Users
-                            </a>
-                        </li>
-                        <hr>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/view-books">
+                            <a class="nav-link active" href="/admin/view-books">
                                 <span data-feather="book"></span>
                                 View Books
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/add-book">
-                                <span class="text-success" data-feather="file-plus"></span>
-                                Add Book
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/admin/unavailable-books">
-                                <span class="text-warning" data-feather="bookmark"></span>
-                                Unavailable Books
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/users-book-request">
-                                <span class="text-info" data-feather="unlock"></span>
-                                Users Book Request
                             </a>
                         </li>
                     </ul>
@@ -82,12 +50,12 @@
             </nav>
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <h1 class="h2 mt-1">Unavailable Books</h1>
+                <h1 class="h2 mt-1">View Books || User</h1>
                 <hr>
                 <div class="row">
                     <div class="col">
                         <table class="table table-bordered caption-top table-hover" id="bookListTable">
-                            <caption>List of Unavailable books</caption>
+                            <caption>List of books</caption>
                             <thead class="bg-light">
                                 <tr>
                                     <th>#</th>
@@ -98,7 +66,10 @@
                                     <th><span data-feather="activity"></span> Actions</th>
                                 </tr>
                             </thead>
-                            <tbody th:each="book,loop : ${books}">
+                            <tbody>
+
+                            </tbody>
+                            <!-- <tbody th:each="book,loop : ${books}">
                                 <tr>
                                     <td th:text="${loop.count}"></td>
                                     <td th:text="${book.title}"></td>
@@ -110,16 +81,16 @@
                                     </td>
                                     <td th:text="${book.publishedYear}"></td>
                                     <td>
-                                        <!-- <div class="btn-group" role="group" aria-label="Basic example">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
                                             <button type="button" class="btn btn-primary btn-sm"><span
                                                     data-feather="edit-3"></span> Edit</button>
                                             <button type="button" class="btn btn-danger btn-sm"
                                                 th:attr="onclick=|deleteBook('${book.uid}')|"><span
                                                     data-feather="trash-2"></span> Delete</button>
-                                        </div> -->
+                                        </div>
                                     </td>
                                 </tr>
-                            </tbody>
+                            </tbody> -->
                         </table>
                     </div>
                 </div>
@@ -180,35 +151,12 @@
             var tableRef = document.getElementsByTagName("table")[0].tBodies[0]
 
             books.forEach(function (book, index) {
-                // var newRow = tableRef.insertRow(0);
-                // var sno = newRow.insertCell(0)
-                // var title = newRow.insertCell(1)
-                // var author = newRow.insertCell(2)
-                // var availablity = newRow.insertCell(3)
-                // var publishedYear = newRow.insertCell(4)
-                // var actions = newRow.insertCell(5)
                 var sno;
                 var title;
                 var author;
                 var availablity;
                 var publishedYear;
                 var actions;
-
-                // sno= (index + 1)
-                // title.innerText = book.title
-                // author.innerText = book.author
-                // publishedYear.innerText = book.publishedYear
-                // if (book.available) {
-                //     availablity.innerHTML = `<span class="badge bg-info">Available</span>`
-                // } else {
-                //     availablity.innerHTML = `<span class="badge bg-secondary">Unavailable</span>`
-                // }
-
-                // actions.innerHTML = `<div class="btn-group" role="group" aria-label="Admin Operations">
-                //                             <button type="button" class="btn btn-primary btn-sm"><span data-feather="edit-3"></span> Edit</button>
-                //                             <button type="button" class="btn btn-danger btn-sm"><span data-feather="trash-2"></span> Delete</button>
-                //                             </div>`;
-
                 sno = `<td>${index + 1}</td>`
                 title = `<td>${book.title}</td>`
                 author = `<td>${book.author}</td>`
@@ -226,10 +174,8 @@
                 $("#bookListTable tbody").append(`<tr>${sno + title + author + availablity + publishedYear + actions}</tr>`);
             });
 
-
-
         }
-        // getAllBooks()
+        getAllBooks()
 
     </script>
 </body>
