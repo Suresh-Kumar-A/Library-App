@@ -28,7 +28,7 @@ public class AppConstants {
                 BookDto bookDto1 = new BookDto();
                 bookDto1.setTitle("Wings of Fire");
                 bookDto1.setAuthor("Dr. APJ Kalam");
-                bookDto1.setDescription("Good BookDto for youngsters");
+                bookDto1.setDescription("Good book for youngsters");
                 bookDto1.setAvailable(Boolean.TRUE);
                 bookDto1.setPublishedYear(Year.parse("1999"));
 
@@ -58,8 +58,7 @@ public class AppConstants {
                 BookDto bookDto5 = new BookDto();
                 bookDto5.setTitle("I Am Malala");
                 bookDto5.setAuthor("Malala Yousafzai");
-                bookDto5.setDescription(
-                                "The Story of the Girl Who Stood Up for Education and was Shot by the Taliban is an autobiographical BookDto by Malala Yousafzai");
+                bookDto5.setDescription("The Story of the Girl Who Stood Up for Education and was Shot by the Taliban");
                 bookDto5.setAvailable(Boolean.TRUE);
                 bookDto5.setPublishedYear(Year.parse("2013"));
 
