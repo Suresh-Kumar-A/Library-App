@@ -8,7 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.gmail.creativegeeksuresh.libraryapp.util.AppConstants;
+import com.gmail.creativegeeksuresh.libraryapp.service.util.AppConstants;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;

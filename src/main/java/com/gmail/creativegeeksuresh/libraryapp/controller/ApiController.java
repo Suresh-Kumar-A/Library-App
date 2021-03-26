@@ -9,6 +9,7 @@ import com.gmail.creativegeeksuresh.libraryapp.exception.UserAlreadyExistsExcept
 import com.gmail.creativegeeksuresh.libraryapp.service.BookRequestService;
 import com.gmail.creativegeeksuresh.libraryapp.service.BookService;
 import com.gmail.creativegeeksuresh.libraryapp.service.UserService;
+import com.gmail.creativegeeksuresh.libraryapp.service.util.CustomPdfService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -32,6 +34,9 @@ public class ApiController {
 
     @Autowired
     BookRequestService bookRequestService;
+
+    @Autowired
+    CustomPdfService customPdfService;
 
     @PostMapping(value = "/create-account")
     public ResponseEntity<?> createUserAccount(@RequestBody UserDto request) {
@@ -131,6 +136,17 @@ public class ApiController {
         } catch (UserAlreadyExistsException uaex) {
             System.err.println(uaex.getLocalizedMessage());
             return new ResponseEntity<>(uaex.getLocalizedMessage(), HttpStatus.CONFLICT);
+        } catch (Exception ex) {
+            System.err.println(ex.getLocalizedMessage());
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping(value = "/admin/upload-book-contents", consumes = "multipart/form-data")
+    public ResponseEntity<?> uploadBookContents(@RequestParam("book") MultipartFile file) {
+        try {
+            customPdfService.createFile(file.getInputStream());
+            return new ResponseEntity<>(null, HttpStatus.CREATED);
         } catch (Exception ex) {
             System.err.println(ex.getLocalizedMessage());
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);

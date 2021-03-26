@@ -8,6 +8,7 @@ import com.gmail.creativegeeksuresh.libraryapp.exception.BookAlreadyExistsExcept
 import com.gmail.creativegeeksuresh.libraryapp.exception.InvalidBookException;
 import com.gmail.creativegeeksuresh.libraryapp.model.Book;
 import com.gmail.creativegeeksuresh.libraryapp.repository.BookRepository;
+import com.gmail.creativegeeksuresh.libraryapp.service.util.CustomUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

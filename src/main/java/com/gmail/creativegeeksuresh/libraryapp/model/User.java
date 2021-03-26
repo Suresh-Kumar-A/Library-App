@@ -22,28 +22,31 @@ public class User {
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String uid;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String username;
 
-    @Column(unique = true)
-    private String email;
-
-    @Column
+    @Column(nullable = false)
     private String password;
+
+    @Column(unique = true, nullable = false)
+    private String email;
 
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
+    @Column
+    private Boolean status = Boolean.TRUE;
+
     // If you don't use CascadeType.MERGE you can't add a user in app startup
-    // using CommandLineRunner 
+    // using CommandLineRunner
     // you will get an error : detached entity passed to persist
     // OR just remove the CascadeType
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_role")
+    @JoinColumn(name = "user_role_id")
     private Role role;
 
     public Integer getId() {
@@ -100,6 +103,14 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
 }

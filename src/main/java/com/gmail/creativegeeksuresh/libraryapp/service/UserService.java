@@ -10,7 +10,8 @@ import com.gmail.creativegeeksuresh.libraryapp.exception.UserAlreadyExistsExcept
 import com.gmail.creativegeeksuresh.libraryapp.model.Role;
 import com.gmail.creativegeeksuresh.libraryapp.model.User;
 import com.gmail.creativegeeksuresh.libraryapp.repository.UserRepository;
-import com.gmail.creativegeeksuresh.libraryapp.util.AppConstants;
+import com.gmail.creativegeeksuresh.libraryapp.service.util.AppConstants;
+import com.gmail.creativegeeksuresh.libraryapp.service.util.CustomUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

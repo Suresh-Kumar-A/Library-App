@@ -4,7 +4,7 @@ import com.gmail.creativegeeksuresh.libraryapp.model.Role;
 import com.gmail.creativegeeksuresh.libraryapp.service.BookService;
 import com.gmail.creativegeeksuresh.libraryapp.service.RoleService;
 import com.gmail.creativegeeksuresh.libraryapp.service.UserService;
-import com.gmail.creativegeeksuresh.libraryapp.util.AppConstants;
+import com.gmail.creativegeeksuresh.libraryapp.service.util.AppConstants;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,6 +33,7 @@ public class LibraryAppApplication implements CommandLineRunner {
 	@Autowired
 	BookService bookService;
 
+
 	public static void main(String[] args) {
 		SpringApplication.run(LibraryAppApplication.class, args);
 	}
@@ -40,12 +41,13 @@ public class LibraryAppApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		try {
+
 			// checking if all role exists otherwise adding them
 			if (roleService.getAllRoles().size() == 0) {
 				AppConstants.ROLE_SET.forEach(roleName -> {
 					try {
 						Role role = new Role();
-						role.setRole(roleName);
+						role.setRoleName(roleName);
 						roleService.createRole(role);
 					} catch (Exception e) {
 						System.err.println(e.getLocalizedMessage());
@@ -57,14 +59,16 @@ public class LibraryAppApplication implements CommandLineRunner {
 			userService.createAdminUser(adminUsername, adminPassword, adminEmail);
 
 			// Creating default Book set
-			AppConstants.DEFAULT_DATA_LIST.forEach(book -> {
-				try {
-					bookService.addBook(book);
-				} catch (Exception e) {
-					System.err.println(e.getLocalizedMessage());
-					e.printStackTrace();
-				}
-			});
+			if (bookService.getAllBooks().size() == 0) {
+				AppConstants.DEFAULT_DATA_LIST.forEach(book -> {
+					try {
+						bookService.addBook(book);
+					} catch (Exception e) {
+						System.err.println(e.getLocalizedMessage());
+						e.printStackTrace();
+					}
+				});
+			}
 
 		} catch (Exception e) {
 			System.err.println(e.getLocalizedMessage());

@@ -20,7 +20,7 @@ public class RoleService {
     }
 
     public Role findByRoleName(String role) throws Exception {
-        return roleRepo.findByRole(role);
+        return roleRepo.findByRoleName(role);
     }
 
     public List<Role> getAllRoles() throws Exception {

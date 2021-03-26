@@ -2,8 +2,8 @@ package com.gmail.creativegeeksuresh.libraryapp.controller;
 
 import com.gmail.creativegeeksuresh.libraryapp.service.BookRequestService;
 import com.gmail.creativegeeksuresh.libraryapp.service.BookService;
-import com.gmail.creativegeeksuresh.libraryapp.service.CustomUtils;
 import com.gmail.creativegeeksuresh.libraryapp.service.UserService;
+import com.gmail.creativegeeksuresh.libraryapp.service.util.CustomUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

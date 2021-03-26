@@ -3,7 +3,7 @@ package com.gmail.creativegeeksuresh.libraryapp.configuration;
 import com.gmail.creativegeeksuresh.libraryapp.security.CustomAccessDeniedHandler;
 import com.gmail.creativegeeksuresh.libraryapp.security.CustomAuthSuccessHandler;
 import com.gmail.creativegeeksuresh.libraryapp.security.CustomUserDetailsService;
-import com.gmail.creativegeeksuresh.libraryapp.util.AppConstants;
+import com.gmail.creativegeeksuresh.libraryapp.service.util.AppConstants;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

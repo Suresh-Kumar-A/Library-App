@@ -3,7 +3,7 @@ package com.gmail.creativegeeksuresh.libraryapp.security;
 import java.util.Collection;
 
 import com.gmail.creativegeeksuresh.libraryapp.model.User;
-import com.gmail.creativegeeksuresh.libraryapp.util.AppConstants;
+import com.gmail.creativegeeksuresh.libraryapp.service.util.AppConstants;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -21,7 +21,7 @@ public class CustomUserDetails implements UserDetails, ICustomUserDetails {
 
     @Override
     public String getRoleName() {
-        return user.getRole().getRole();
+        return user.getRole().getRoleName();
     }
 
     @Override
@@ -31,7 +31,7 @@ public class CustomUserDetails implements UserDetails, ICustomUserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return AuthorityUtils.createAuthorityList(AppConstants.ROLE_STRING + user.getRole().getRole());
+        return AuthorityUtils.createAuthorityList(AppConstants.ROLE_STRING + user.getRole().getRoleName());
     }
 
     @Override
@@ -46,26 +46,30 @@ public class CustomUserDetails implements UserDetails, ICustomUserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
+        // Indicates whether the user's account has expired. An expired account cannot
+        // be authenticated.
         return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
+        // Indicates whether the user is locked or unlocked. A locked user cannot be
+        // authenticated.
         return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
+        // Indicates whether the user's credentials (password) has expired. Expired
+        // credentials prevent authentication.
         return true;
     }
 
     @Override
     public boolean isEnabled() {
-        // TODO Auto-generated method stub
-        return true;
+        // Indicates whether the user is enabled or disabled. A disabled user cannot be
+        // authenticated.
+        return user.getStatus();
     }
 
 }

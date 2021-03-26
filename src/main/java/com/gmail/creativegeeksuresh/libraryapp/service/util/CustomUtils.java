@@ -1,4 +1,4 @@
-package com.gmail.creativegeeksuresh.libraryapp.service;
+package com.gmail.creativegeeksuresh.libraryapp.service.util;
 
 import java.security.MessageDigest;
 import java.text.DateFormat;
