@@ -1,11 +1,13 @@
 package com.gmail.creativegeeksuresh.libraryapp.controller;
 
+import com.gmail.creativegeeksuresh.libraryapp.model.Book;
 import com.gmail.creativegeeksuresh.libraryapp.service.BookRequestService;
 import com.gmail.creativegeeksuresh.libraryapp.service.BookService;
 import com.gmail.creativegeeksuresh.libraryapp.service.UserService;
 import com.gmail.creativegeeksuresh.libraryapp.service.util.CustomUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AppController {
+
+    @Value("${default.storage.path}")
+    private String defaultStoragePath;
 
     @Autowired
     UserService userService;
@@ -22,10 +27,9 @@ public class AppController {
 
     @Autowired
     CustomUtils customUtils;
-    
+
     @Autowired
     BookRequestService bookRequestService;
-
 
     @GetMapping(value = { "/", "/login" })
     public ModelAndView signInPage() {
@@ -40,7 +44,15 @@ public class AppController {
     @GetMapping(value = "/test")
     public ModelAndView testPage() {
         ModelAndView mv = new ModelAndView("test");
-        // mv.addObject("path", customUtils.getUsername());
+        // Path path = Paths.get("E:\\adobedata.pdf").toAbsolutePath().normalize();
+
+        // Resource resource=null;
+        // try {
+        // resource = new UrlResource(path.toUri());
+        // } catch (Exception e) {
+        // // TODO: handle exception
+        // }
+        // mv.addObject("resource", resource);
         return mv;
     }
 
@@ -102,6 +114,16 @@ public class AppController {
         mv.addObject("username", customUtils.getUsername());
         mv.addObject("requestList", bookRequestService.getAllBooks());
         return mv;
-
     }
+
+    @GetMapping(value = "/error/page-unavailable")
+    public ModelAndView pageUnavailablePage() {
+        return new ModelAndView("error/page-not-found");
+    }
+
+    @GetMapping(value = "/error/internal-server-error")
+    public ModelAndView internalServerErrorPage() {
+        return new ModelAndView("error/internal-server-error");
+    }
+
 }

@@ -29,6 +29,9 @@ public class Book {
     @Column
     private String description;
 
+    @Column(nullable = false, unique = true)
+    private String location;
+
     @Column
     private Boolean available = Boolean.TRUE;
 
@@ -91,4 +94,11 @@ public class Book {
         this.available = available;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 }

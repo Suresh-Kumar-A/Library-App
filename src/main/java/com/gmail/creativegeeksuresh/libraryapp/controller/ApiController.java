@@ -1,8 +1,5 @@
 package com.gmail.creativegeeksuresh.libraryapp.controller;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -11,6 +8,7 @@ import com.gmail.creativegeeksuresh.libraryapp.dto.BookDto;
 import com.gmail.creativegeeksuresh.libraryapp.dto.BookRequestDto;
 import com.gmail.creativegeeksuresh.libraryapp.dto.UserDto;
 import com.gmail.creativegeeksuresh.libraryapp.exception.UserAlreadyExistsException;
+import com.gmail.creativegeeksuresh.libraryapp.model.Book;
 import com.gmail.creativegeeksuresh.libraryapp.service.BookRequestService;
 import com.gmail.creativegeeksuresh.libraryapp.service.BookService;
 import com.gmail.creativegeeksuresh.libraryapp.service.UserService;
@@ -19,11 +17,9 @@ import com.gmail.creativegeeksuresh.libraryapp.service.util.CustomPdfService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -173,10 +169,29 @@ public class ApiController {
 
             return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/pdf")).body(resource);
 
+            // return new ResponseEntity<>("", HttpStatus.OK);
 
-            // #toolbar=0   -- use to prevent download option in chrome browser
+            // #toolbar=0 -- use to prevent download option in chrome browser
             // Working
             // return new ResponseEntity<>(resource, HttpStatus.OK);
+        } catch (Exception ex) {
+            System.err.println(ex.getLocalizedMessage());
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // #toolbar=0 -- use to prevent download option in chrome browser
+    @GetMapping(value = "/read-book")
+    public ResponseEntity<?> readBookInPdf(@RequestParam String uid) {
+        try {
+            Book requestedBook = bookService.findByUid(uid);
+            if (requestedBook != null && requestedBook.getAvailable() && !requestedBook.getLocation().isEmpty()){
+                Path path = Paths.get(requestedBook.getLocation()).toAbsolutePath().normalize();
+                Resource resource = new UrlResource(path.toUri());
+                return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/pdf")).body(resource);
+            } else {
+                throw new Exception("Requested Book unavailable :" + uid);
+            }
         } catch (Exception ex) {
             System.err.println(ex.getLocalizedMessage());
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
