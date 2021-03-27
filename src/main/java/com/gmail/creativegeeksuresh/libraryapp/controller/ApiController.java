@@ -167,22 +167,16 @@ public class ApiController {
     public ResponseEntity<?> readPdf() {
         try {
 
-            Path path = Paths.get("E:\\myreport.pdf").toAbsolutePath().normalize();
+            Path path = Paths.get("E:\\adobedata.pdf").toAbsolutePath().normalize();
 
             Resource resource = new UrlResource(path.toUri());
 
-            // return
-            // ResponseEntity.ok().contentType(MediaType.parseMediaType("application/octet-stream"))
-            // .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" +
-            // resource.getFilename() + "\"")
-            // .body(resource);
+            return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/pdf")).body(resource);
 
-            // return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/octet-stream"))
-            //         .header(HttpHeaders.CONTENT_DISPOSITION, "filename=\"" + resource.getFilename() + "\"")
-            //         .body(resource);
 
-            // return ResponseEntity.ok().body(resource);
-            return new ResponseEntity<>(resource, HttpStatus.OK);
+            // #toolbar=0   -- use to prevent download option in chrome browser
+            // Working
+            // return new ResponseEntity<>(resource, HttpStatus.OK);
         } catch (Exception ex) {
             System.err.println(ex.getLocalizedMessage());
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
