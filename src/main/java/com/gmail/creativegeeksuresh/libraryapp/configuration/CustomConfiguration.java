@@ -63,6 +63,8 @@ public class CustomConfiguration extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login?accessdenied").and().logout().invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID").permitAll().and().exceptionHandling()
                 .accessDeniedHandler(accessDeniedHandler);
+
+        http.headers().frameOptions().disable();
     }
 
 }

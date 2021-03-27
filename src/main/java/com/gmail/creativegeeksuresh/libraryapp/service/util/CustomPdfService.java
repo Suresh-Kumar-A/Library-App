@@ -20,4 +20,8 @@ public class CustomPdfService {
         document.save(outputFilepath);
     }
 
+    public File readFile(){
+        return new File("E:\\testdoc.pdf");
+    }
+
 }

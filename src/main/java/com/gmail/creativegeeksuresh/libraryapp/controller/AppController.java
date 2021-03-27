@@ -37,6 +37,13 @@ public class AppController {
         return new ModelAndView("create-account");
     }
 
+    @GetMapping(value = "/test")
+    public ModelAndView testPage() {
+        ModelAndView mv = new ModelAndView("test");
+        // mv.addObject("path", customUtils.getUsername());
+        return mv;
+    }
+
     @GetMapping(value = "/user/view-books")
     public ModelAndView viewBooksUserPage() {
         ModelAndView mv = new ModelAndView("user/view-books");

@@ -1,5 +1,10 @@
 package com.gmail.creativegeeksuresh.libraryapp.controller;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 
 import com.gmail.creativegeeksuresh.libraryapp.dto.BookDto;
@@ -12,8 +17,13 @@ import com.gmail.creativegeeksuresh.libraryapp.service.UserService;
 import com.gmail.creativegeeksuresh.libraryapp.service.util.CustomPdfService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -147,6 +157,32 @@ public class ApiController {
         try {
             customPdfService.createFile(file.getInputStream());
             return new ResponseEntity<>(null, HttpStatus.CREATED);
+        } catch (Exception ex) {
+            System.err.println(ex.getLocalizedMessage());
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value = "/admin/read-pdf")
+    public ResponseEntity<?> readPdf() {
+        try {
+
+            Path path = Paths.get("E:\\myreport.pdf").toAbsolutePath().normalize();
+
+            Resource resource = new UrlResource(path.toUri());
+
+            // return
+            // ResponseEntity.ok().contentType(MediaType.parseMediaType("application/octet-stream"))
+            // .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" +
+            // resource.getFilename() + "\"")
+            // .body(resource);
+
+            // return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/octet-stream"))
+            //         .header(HttpHeaders.CONTENT_DISPOSITION, "filename=\"" + resource.getFilename() + "\"")
+            //         .body(resource);
+
+            // return ResponseEntity.ok().body(resource);
+            return new ResponseEntity<>(resource, HttpStatus.OK);
         } catch (Exception ex) {
             System.err.println(ex.getLocalizedMessage());
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
