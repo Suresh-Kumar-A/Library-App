@@ -32,7 +32,7 @@
                                     <th><span data-feather="activity"></span> Actions</th>
                                 </tr>
                             </thead>
-                            <tbody th:each="user,loop : ${users}">
+                            <tbody th:each="user,loop : ${userList}">
                                 <tr>
                                     <td th:text="${loop.count}"></td>
                                     <td th:text="${user.username}"></td>

@@ -35,7 +35,7 @@
                             <tbody>
 
                             </tbody>
-                            <!-- <tbody th:each="book,loop : ${books}">
+                            <tbody th:each="book,loop : ${bookList}">
                                 <tr>
                                     <td th:text="${loop.count}"></td>
                                     <td th:text="${book.title}"></td>
@@ -47,26 +47,26 @@
                                     </td>
                                     <td th:text="${book.publishedYear}"></td>
                                     <td>
-                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                        <div class="btn-group" role="group" aria-label="admin actions">
                                             <button type="button" class="btn btn-primary btn-sm"><span
                                                     data-feather="edit-3"></span> Edit</button>
                                             <button type="button" class="btn btn-danger btn-sm"
                                                 th:attr="onclick=|deleteBook('${book.uid}')|"><span
                                                     data-feather="trash-2"></span> Delete</button>
                                         </div>
+
+                                        <a type="button" class="btn btn-success btn-sm fw-bold"
+                                            th:href="'/api/v1/read-book?uid='+ ${book.uid}">Read Book
+                                            <i class="fas fa-external-link-alt"></i></a>
                                     </td>
                                 </tr>
-                            </tbody> -->
+                            </tbody>
                         </table>
                     </div>
                 </div>
             </main>
         </div>
     </div>
-
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <body th:replace="fragments/general :: js"></body>
     <script>
@@ -84,79 +84,6 @@
                     showTopErrorNotificationWithMessage("Unable to delete book. Try again")
                 })
         }
-
-        function getAllBooks() {
-            const getRequestOptions = {
-                method: 'GET'
-            };
-            fetch(apiServerUrl + "/get-all-books", getRequestOptions)
-                .then(response => response.json())
-                .then((data) => {
-                    console.log(data)
-                    parseDataToTable(data);
-                    // showTopSuccessNotificationWithMessageAndAutoReload("Book Deleted successfully")
-                })
-                .catch(() => {
-                    // showTopErrorNotificationWithMessage("Unable to delete book. Try again")
-                })
-        }
-
-        function parseDataToTable(books) {
-
-            var tableRef = document.getElementsByTagName("table")[0].tBodies[0]
-
-            books.forEach(function (book, index) {
-                // var newRow = tableRef.insertRow(0);
-                // var sno = newRow.insertCell(0)
-                // var title = newRow.insertCell(1)
-                // var author = newRow.insertCell(2)
-                // var availablity = newRow.insertCell(3)
-                // var publishedYear = newRow.insertCell(4)
-                // var actions = newRow.insertCell(5)
-                var sno;
-                var title;
-                var author;
-                var availablity;
-                var publishedYear;
-                var actions;
-
-                // sno= (index + 1)
-                // title.innerText = book.title
-                // author.innerText = book.author
-                // publishedYear.innerText = book.publishedYear
-                // if (book.available) {
-                //     availablity.innerHTML = `<span class="badge bg-info">Available</span>`
-                // } else {
-                //     availablity.innerHTML = `<span class="badge bg-secondary">Unavailable</span>`
-                // }
-
-                // actions.innerHTML = `<div class="btn-group" role="group" aria-label="Admin Operations">
-                //                             <button type="button" class="btn btn-primary btn-sm"><span data-feather="edit-3"></span> Edit</button>
-                //                             <button type="button" class="btn btn-danger btn-sm"><span data-feather="trash-2"></span> Delete</button>
-                //                             </div>`;
-
-                sno = `<td>${index + 1}</td>`
-                title = `<td>${book.title}</td>`
-                author = `<td>${book.author}</td>`
-                publishedYear = `<td>${book.publishedYear}</td>`
-                if (book.available) {
-                    availablity = `<td><span class="badge bg-info">Available</span></td>`
-                } else {
-                    availablity = `<td><span class="badge bg-secondary">Unavailable</span></td>`
-                }
-
-                actions = `<td><div class="btn-group" role="group" aria-label="Admin Operations">
-                            <a href="${serverUrl + "/admin/edit-book?uid=" + book.uid}" class="btn btn-primary btn-sm"><span data-feather="edit-3"></span> Edit</a>
-                            <button type="button" class="btn btn-danger btn-sm" onclick="deleteBook('${book.uid}')"><span data-feather="trash-2"></span> Delete</button>
-                            </div></td>`;
-                $("#bookListTable tbody").append(`<tr>${sno + title + author + availablity + publishedYear + actions}</tr>`);
-            });
-
-
-
-        }
-        getAllBooks()
-
     </script>
 </body>
 

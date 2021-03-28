@@ -7,6 +7,7 @@
     <title>View Books | LibraryApp</title>
 
     <head th:replace="fragments/general :: css"></head>
+
 </head>
 
 <body>
@@ -23,8 +24,34 @@
                 <h1 class="h2 mt-1">View Books || User</h1>
                 <hr>
                 <input type="hidden" name="username" id="username" th:value="${username}">
-                <div class="row row-cols-1 row-cols-md-3 g-4" id="booksCardRow">
+                <div class="row row-cols-md-3 row-cols-lg-4 row-cols-sm-2 g-4 mb-5" id="booksCardRow">
 
+                    <div class="col" th:each="book,loop : ${bookList}">
+                        <div class="card h-100" style="max-width: 250px;">
+                            <img th:src="'/images/image-'+(${loop.count}%6+1)+'.jpg'" class="card-img-top"
+                                alt="read-bokk">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${book.title}"></h5>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    <i class="fas fa-user-tag"></i>
+                                    <span th:text="${book.author}"></span>
+                                </h6>
+                                <p class="card-text" th:text="${book.description}"></p>
+                                <div class="d-grid" th:if="${book.available}">
+                                    <a type="button" class="btn btn-success fw-bold"
+                                        th:href="'/api/v1/read-book?uid='+ ${book.uid}">Read Book
+                                        <i class="fas fa-external-link-alt"></i></a>
+                                </div>
+                                <div class="d-grid" th:unless="${book.available}">
+                                    <button type="button" class="btn btn-danger fw-bold"
+                                        th:attr="onclick=|requestBookAccess('${book.title}','${book.uid}')|">
+                                        <i class="fas fa-eye-slash"></i>
+                                        Request Access</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>
@@ -36,72 +63,6 @@
 
     <body th:replace="fragments/general :: js"></body>
     <script>
-        function getAllBooks() {
-            const getRequestOptions = {
-                method: 'GET'
-            };
-            fetch(apiServerUrl + "/get-all-books", getRequestOptions)
-                .then(response => response.json())
-                .then((data) => {
-                    console.log(data)
-                    parseDataToCards(data);
-                    // showTopSuccessNotificationWithMessageAndAutoReload("Book Deleted successfully")
-                })
-                .catch(() => {
-                    // showTopErrorNotificationWithMessage("Unable to delete book. Try again")
-                })
-        }
-
-        function parseDataToCards(books) {
-
-            books.forEach(function (book, index) {
-                var card;
-                if (book.available) {
-                    card = availableBookCard(book)
-                } else {
-                    card = unavilableBookCard(book)
-                }
-                $("#booksCardRow").append(card);
-            });
-
-        }
-
-        function availableBookCard(book) {
-            return `<div class="col">
-                        <div class="card mb-3" style="max-width: 600px;">
-                            <div class="row g-0">
-                                <div class="col-md-5">
-                                    <img src="../images/book-open.svg" class="card-img-top" alt="available_img">
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="card-body">
-                                        <h5 class="card-title">${book.title}</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">${book.author}</h6>
-                                        <p class="card-text">${book.description}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`
-        }
-        function unavilableBookCard(book) {
-            return ` <div class="col">
-                        <div class="card mb-3" style="max-width: 600px;">
-                            <div class="row g-0">
-                                <div class="col-md-5">
-                                    <img src="../images/lock.svg" class="card-img-top" alt="unavailable_img">
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="card-body">
-                                        <h5 class="card-title">${book.title}</h5>
-                                        <button type="button" class="btn btn-secondary" onclick="requestBookAccess('${book.title}','${book.uid}')">Request Access</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`
-        }
-
         function requestBookAccess(title, uid) {
             var username = document.getElementById("username").value
             var request = {};
@@ -123,8 +84,6 @@
                     showTopErrorNotificationWithMessage("Unable to request access to book. Try again")
                 })
         }
-
-        getAllBooks()
     </script>
 </body>
 

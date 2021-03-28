@@ -19,64 +19,13 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <h1 class="h2 mt-1">Dashboard</h1>
                 <hr>
-                <div class="row">
-                    <div class="col">
-                        <div class="card bg-light" style="width: 35rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Upload Book Form</h5>
-                                <form action="#" class="mt-1">
-                                    <div class="mb-3">
-                                        <label for="formFile" class="form-label">Select the Book(.pdf)</label>
-                                        <input class="form-control" type="file" id="book" name="book" accept=".pdf">
-                                    </div>
-                                    <div class="d-grid">
-                                        <button class="btn btn-success font-monospace fw-bold text-uppercase"
-                                            type="button" onclick="uploadFile()">Upload Book</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
 
             </main>
         </div>
     </div>
 
     <body th:replace="fragments/general :: js"></body>
-    <script>
-        function uploadFile() {
-
-            const selectedFile = document.getElementById('book').files[0];
-            var formData = new FormData()
-            formData.append('book', selectedFile)
-            const postRequestOptions = {
-                method: 'POST',
-                body: formData
-            };
-            fetch(apiServerUrl + "/admin/upload-book", postRequestOptions)
-                .then(response => response.json())
-                .then((data) => {
-                    console.log(data)
-                })
-                .catch(() => {
-
-                })
-        }
-
-        function validateFile() {
-            const selectedFile = document.getElementById('book').files[0];
-            if (selectedFile.type !== "application/pdf") {
-                console.error("Not a .pdf type file")
-                return false
-            }
-            if (selectedFile.size === 0) {
-                console.error("File is empty")
-                return false;
-            }
-            return true;
-        }
-    </script>
 </body>
 
 </html>
