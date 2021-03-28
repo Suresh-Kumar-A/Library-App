@@ -148,11 +148,11 @@ public class ApiController {
         }
     }
 
-    @PostMapping(value = "/admin/upload-book-contents", consumes = "multipart/form-data")
+    @PostMapping(value = "/admin/upload-book", consumes = "multipart/form-data")
     public ResponseEntity<?> uploadBookContents(@RequestParam("book") MultipartFile file) {
         try {
-            customPdfService.createFile(file.getInputStream());
-            return new ResponseEntity<>(null, HttpStatus.CREATED);
+            return new ResponseEntity<>(customPdfService.createFile(file.getInputStream(), file.getOriginalFilename()),
+                    HttpStatus.CREATED);
         } catch (Exception ex) {
             System.err.println(ex.getLocalizedMessage());
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
@@ -185,7 +185,7 @@ public class ApiController {
     public ResponseEntity<?> readBookInPdf(@RequestParam String uid) {
         try {
             Book requestedBook = bookService.findByUid(uid);
-            if (requestedBook != null && requestedBook.getAvailable() && !requestedBook.getLocation().isEmpty()){
+            if (requestedBook != null && requestedBook.getAvailable() && !requestedBook.getLocation().isEmpty()) {
                 Path path = Paths.get(requestedBook.getLocation()).toAbsolutePath().normalize();
                 Resource resource = new UrlResource(path.toUri());
                 return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/pdf")).body(resource);

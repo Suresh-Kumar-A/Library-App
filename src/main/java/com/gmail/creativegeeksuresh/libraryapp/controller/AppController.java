@@ -1,6 +1,5 @@
 package com.gmail.creativegeeksuresh.libraryapp.controller;
 
-import com.gmail.creativegeeksuresh.libraryapp.model.Book;
 import com.gmail.creativegeeksuresh.libraryapp.service.BookRequestService;
 import com.gmail.creativegeeksuresh.libraryapp.service.BookService;
 import com.gmail.creativegeeksuresh.libraryapp.service.UserService;

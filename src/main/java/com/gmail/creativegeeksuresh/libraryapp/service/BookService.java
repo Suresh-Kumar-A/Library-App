@@ -34,6 +34,7 @@ public class BookService {
         newBook.setAvailable(request.getAvailable());
         newBook.setPublishedYear(request.getPublishedYear());
         newBook.setUid(customUtils.generateToken());
+        newBook.setLocation(request.getLocation());
         return bookRepo.save(newBook);
     }
 

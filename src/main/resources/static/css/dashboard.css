@@ -90,3 +90,8 @@ body {
   border-width: 0;
   border-radius: 0;
 }
+
+/* Custom Styles */
+hr.custom-margin{
+  margin: .3rem 0;
+}

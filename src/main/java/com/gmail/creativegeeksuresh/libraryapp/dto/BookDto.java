@@ -17,6 +17,8 @@ public class BookDto {
 
     private Year publishedYear;
 
+    private String location;
+
     public String getUid() {
         return uid;
     }
@@ -63,6 +65,14 @@ public class BookDto {
 
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
 }
