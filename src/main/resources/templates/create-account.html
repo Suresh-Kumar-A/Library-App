@@ -8,9 +8,9 @@
     <!-- Bootstrap | CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <!-- Font Awesome | Icons -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
-        integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <!-- Roboto Font | Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
     <style>
         /* important to set the height for full screen height */
         .custom-full-height {
@@ -20,6 +20,10 @@
         img {
             height: 100% !important;
         }
+
+        input {
+            font-family: 'Roboto' !important;
+        }
     </style>
 </head>
 
@@ -27,69 +31,51 @@
 
     <div class="d-flex justify-content-center align-items-center custom-full-height">
         <!-- Create Account Form Card | Start -->
-        <div class="card" style="max-width: 60rem;">
+        <div class="card" style="max-width: 65rem;">
             <div class="row g-0">
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <img src="/images/image-5.jpg" class="card-img" alt="open-book-with-candle">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="card-body">
                         <h5 class="card-title text-center">Let's Get Started</h5>
                         <h6 class="card-subtitle text-muted my-1 text-center">First, create your account</h6>
                         <form action="#" class="mt-3 row">
                             <div class="col-12">
-                                <label class="h6 card-subtitle" for="displayName">Name</label>
-                                <div class="input-group mb-2">
-                                    <span class="input-group-text" id="at-addon">
-                                        <i class="fas fa-at"></i>
-                                    </span>
+                                <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="displayName"
-                                        placeholder="Eg: sureshkumar.a" aria-describedby="at-addon">
-                                    <!-- <div class="invalid-tooltip">
-                                        Please choose a unique and valid username without space
-                                    </div> -->
+                                        placeholder="Eg: Suresh Kumar A" name="displayName" autofocus>
+                                    <label class="h6 card-subtitle" for="displayName">Display Name</label>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <label class="h6 card-subtitle" for="email-address">Email address</label>
-                                <div class="input-group mb-2">
-                                    <span class="input-group-text" id="mail-addon">
-                                        <i class="fas fa-envelope"></i>
-                                    </span>
-                                    <input type="email" class="form-control" id="email-address"
-                                        placeholder="Eg: user@domain.com" aria-describedby="email-addon">
-                                    <!-- <div class="invalid-tooltip">
-                                        Please choose a valid Email address
-                                    </div> -->
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" id="emailAddress"
+                                        placeholder="Eg: user@gmail.com" name="emailAddress" autofocus>
+                                    <label class="h6 card-subtitle" for="emailAddress">Email address</label>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <label class="h6 card-subtitle" for="password">Password</label>
-                                <div class="input-group mb-2">
-                                    <span class="input-group-text" id="key-addon">
-                                        <i class="fas fa-key"></i>
-                                    </span>
+                                <div class="form-floating mb-2">
                                     <input type="password" class="form-control" id="password" placeholder="Eg: P@ss123"
-                                        aria-describedby="key-addon">
-                                    <button class="btn btn-secondary" type="button" id="toggle-password" onclick="tooglePassword()">
-                                        <i class="far fa-eye-slash"></i></button>
-                                    <!-- <div class="invalid-tooltip">
-                                        Please choose a unique and valid Password containing at least one numeric digit, one
-                                        uppercase and one lowercase letter
-                                    </div> -->
+                                        name="password">
+                                    <label class="h6 card-subtitle" for="password">Password</label>
+                                    <div class="form-check mt-1">
+                                        <input class="form-check-input" type="checkbox" id="showPassword"
+                                            onclick="tooglePassword()">
+                                        <label class="form-check-label h6 card-subtitle" for="showPassword">
+                                            Show password
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <label class="h6 card-subtitle" for="accountType">Account Type</label>
-                                <div class="input-group mb-2">
-                                    <span class="input-group-text" id="type-addon">
-                                        <i class="fas fa-user-cog"></i>
-                                    </span>
-                                    <select class="form-select" id="accountType" aria-label="account type select menu" aria-describedby="type-addon">
-                                        <option value="1" selected>Reader</option>
-                                        <option value="2">Author</option>
+                                <div class="form-floating">
+                                    <select class="form-select" id="accountType" aria-label="Account Type Options">
+                                        <option value="1" selected>Reader Account</option>
+                                        <option value="2">Author Account</option>
                                     </select>
-                                    
+                                    <label class="h6 card-subtitle" for="accountType">Account Type</label>
                                 </div>
                             </div>
 
@@ -115,15 +101,12 @@
 
     <script>
 
-        function tooglePassword(){
-            var toogleBtn=document.getElementById("toggle-password");
-            var passwordInput=document.getElementById("password");
-            if(passwordInput.type=="password"){
-                passwordInput.type="text"
-                toogleBtn.innerHTML=`<i class="far fa-eye"></i>`
-            }else{
-                passwordInput.type="password"
-                toogleBtn.innerHTML=`<i class="far fa-eye-slash"></i>`
+        function tooglePassword() {
+            var toogleOption = document.getElementById("showPassword");
+            if (toogleOption.checked) {
+                document.getElementById("password").type = "text"
+            } else {
+                document.getElementById("password").type = "password"
             }
         }
 
@@ -139,7 +122,7 @@
             disableRegisterButton()
             var username = document.getElementById("displayName");
             var password = document.getElementById("password");
-            var email = document.getElementById("email-address");
+            var email = document.getElementById("emailAddress");
 
             username.classList.remove("is-valid", "is-invalid");
             email.classList.remove("is-valid", "is-invalid");
@@ -170,8 +153,6 @@
                 return;
             }
 
-
-
             // Continue with Account Creation
             var user = {};
             user.username = username.value;
@@ -190,7 +171,6 @@
                     showTopSuccessNotificationWithMessageAndAutoReload("Account Created Successfully")
                 })
                 .catch(() => {
-                    console.error("unable to fetch users list");
                     showTopErrorNotificationWithMessage("Unable to create account. Try again")
                 })
         }
