@@ -59,7 +59,7 @@ public class CustomConfiguration extends WebSecurityConfigurerAdapter {
                 .hasAnyRole(AppConstants.USER_ROLE_STRING, AppConstants.ADMIN_ROLE_STRING)
                 .antMatchers("/", "/login", "/create-account", "/api/v1/create-account","/error/**").permitAll().anyRequest()
                 .authenticated().and().csrf().disable().formLogin().loginPage("/login").permitAll()
-                .usernameParameter("username").passwordParameter("password").successHandler(authSuccessHandler)
+                .usernameParameter("emailAddress").passwordParameter("password").successHandler(authSuccessHandler)
                 .failureUrl("/login?accessdenied").and().logout().invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID").permitAll().and().exceptionHandling()
                 .accessDeniedHandler(accessDeniedHandler);

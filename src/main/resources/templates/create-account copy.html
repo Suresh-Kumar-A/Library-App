@@ -27,43 +27,30 @@
 
     <div class="d-flex justify-content-center align-items-center custom-full-height">
         <!-- Create Account Form Card | Start -->
-        <div class="card" style="max-width: 60rem;">
+        <div class="card" style="max-width: 55rem;">
             <div class="row g-0">
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <img src="/images/image-5.jpg" class="card-img" alt="open-book-with-candle">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <div class="card-body">
                         <h5 class="card-title text-center">Let's Get Started</h5>
                         <h6 class="card-subtitle text-muted my-1 text-center">First, create your account</h6>
                         <form action="#" class="mt-3 row">
-                            <div class="col-12">
-                                <label class="h6 card-subtitle" for="displayName">Name</label>
+                            <div class="col-6">
+                                <label class="h6 card-subtitle" for="username">Username</label>
                                 <div class="input-group mb-2">
                                     <span class="input-group-text" id="at-addon">
                                         <i class="fas fa-at"></i>
                                     </span>
-                                    <input type="text" class="form-control" id="displayName"
-                                        placeholder="Eg: sureshkumar.a" aria-describedby="at-addon">
+                                    <input type="text" class="form-control" id="username"
+                                        placeholder="Eg: sureshkumar.a" autofocus aria-describedby="at-addon">
                                     <!-- <div class="invalid-tooltip">
                                         Please choose a unique and valid username without space
                                     </div> -->
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <label class="h6 card-subtitle" for="email-address">Email address</label>
-                                <div class="input-group mb-2">
-                                    <span class="input-group-text" id="mail-addon">
-                                        <i class="fas fa-envelope"></i>
-                                    </span>
-                                    <input type="email" class="form-control" id="email-address"
-                                        placeholder="Eg: user@domain.com" aria-describedby="email-addon">
-                                    <!-- <div class="invalid-tooltip">
-                                        Please choose a valid Email address
-                                    </div> -->
-                                </div>
-                            </div>
-                            <div class="col-12">
+                            <div class="col-6">
                                 <label class="h6 card-subtitle" for="password">Password</label>
                                 <div class="input-group mb-2">
                                     <span class="input-group-text" id="key-addon">
@@ -79,7 +66,21 @@
                                     </div> -->
                                 </div>
                             </div>
-                            <div class="col-12">
+                            <div class="col-md-7">
+                                <label class="h6 card-subtitle" for="email-address">Email address</label>
+                                <div class="input-group mb-2">
+                                    <span class="input-group-text" id="mail-addon">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <input type="email" class="form-control" id="email-address"
+                                        placeholder="Eg: user@domain.com" aria-describedby="email-addon">
+                                    <!-- <div class="invalid-tooltip">
+                                        Please choose a valid Email address
+                                    </div> -->
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
                                 <label class="h6 card-subtitle" for="accountType">Account Type</label>
                                 <div class="input-group mb-2">
                                     <span class="input-group-text" id="type-addon">
@@ -127,6 +128,15 @@
             }
         }
 
+        // function tooglePassword() {
+        //     var toogleOption = document.getElementById("showPassword");
+        //     if (toogleOption.checked) {
+        //         document.getElementById("password").type = "text"
+        //     } else {
+        //         document.getElementById("password").type = "password"
+        //     }
+        // }
+
         function showRegisterButton() {
             document.getElementsByTagName("button")[0].disabled = false
         }
@@ -137,7 +147,7 @@
         function validateData() {
 
             disableRegisterButton()
-            var username = document.getElementById("displayName");
+            var username = document.getElementById("username");
             var password = document.getElementById("password");
             var email = document.getElementById("email-address");
 
@@ -146,18 +156,10 @@
             password.classList.remove("is-valid", "is-invalid");
 
 
-            // if (validateUsername(username.value))
-            //     username.classList.add("is-valid")
-            // else {
-            //     username.classList.add("is-invalid")
-            //     showRegisterButton()
-            //     return;
-            // }
-
-            if (validateEmail(email.value))
-                email.classList.add("is-valid")
+            if (validateUsername(username.value))
+                username.classList.add("is-valid")
             else {
-                email.classList.add("is-invalid")
+                username.classList.add("is-invalid")
                 showRegisterButton()
                 return;
             }
@@ -170,7 +172,13 @@
                 return;
             }
 
-
+            if (validateEmail(email.value))
+                email.classList.add("is-valid")
+            else {
+                email.classList.add("is-invalid")
+                showRegisterButton()
+                return;
+            }
 
             // Continue with Account Creation
             var user = {};
