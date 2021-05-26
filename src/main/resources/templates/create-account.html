@@ -26,6 +26,10 @@
         input {
             font-family: 'Roboto' !important;
         }
+
+        .custom-width-65 {
+            width: 65% !important;
+        }
     </style>
 </head>
 
@@ -33,66 +37,135 @@
 
     <div class="d-flex justify-content-center align-items-center custom-full-height">
         <!-- Create Account Form Card | Start -->
-        <div class="card" style="max-width: 65rem;">
+        <div class="card p-lg-4 p-md-3" style="max-width: 25rem;" id="create-account-form-card">
             <div class="row g-0">
-                <div class="col-md-7">
-                    <img src="/images/image-5.jpg" class="card-img" alt="open-book-with-candle">
-                </div>
-                <div class="col-md-5">
+                <div class="col">
                     <div class="card-body">
-                        <img src="/images/logo.png" class="card-img" alt="library app logo">
-                        <h5 class="card-title text-center">Let's Get Started</h5>
-                        <h6 class="card-subtitle text-muted text-center">First, create your account</h6>
-                        <form action="#" class="mt-2 row">
-                            <div class="col-md-6 col-lg-7">
-                                <div class="form-floating mb-2">
-                                    <input type="text" class="form-control" id="displayName"
-                                        placeholder="Eg: Suresh Kumar A" name="displayName" autofocus>
-                                    <label class="h6 card-subtitle" for="displayName">Display Name</label>
+                        <img src="/images/logo.png" class="custom-width-65" alt="library app logo">
+
+                        <div id="step-1" class="step">
+                            <h4 class="card-title my-3">Create Your Account</h4>
+                            <h6 class="card-subtitle text-muted mb-3">Enter the email address you want to use with your
+                                account</h6>
+                            <form action="#" class="row">
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="emailAddress"
+                                            placeholder="Eg: user@gmail.com" name="emailAddress" autofocus>
+                                        <label class="h6 card-subtitle" for="emailAddress">Email address</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 col-lg-5">
-                                <div class="form-floating mb-2">
-                                    <select class="form-select" id="accountType" aria-label="Account Type Options">
-                                        <option value="1" selected>Reader Account</option>
-                                        <option value="2">Author Account</option>
-                                    </select>
-                                    <label class="h6 card-subtitle" for="accountType">Account Type</label>
+                                <div class="d-grid mt-3">
+                                    <button class="btn btn-secondary font-monospace fw-bold text-uppercase "
+                                        type="button" onclick="showStep2()">Next</button>
                                 </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-floating mb-2">
-                                    <input type="email" class="form-control" id="emailAddress"
-                                        placeholder="Eg: user@gmail.com" name="emailAddress" autofocus>
-                                    <label class="h6 card-subtitle" for="emailAddress">Email address</label>
+                            </form>
+                        </div>
+
+                        <div id="step-2" class="d-none step">
+                            <h4 class="card-title my-3">Choose Your Password</h4>
+                            <h6 class="card-subtitle text-muted mb-3">Enter a secret password you would like to use
+                                for this account.</h6>
+                            <form action="#" class="row">
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="password" class="form-control" id="password"
+                                            placeholder="Eg: P@ss123" name="password">
+                                        <label class="h6 card-subtitle" for="password">Password</label>
+                                        <div class="form-check mt-1">
+                                            <input class="form-check-input" type="checkbox" id="showPassword"
+                                                onclick="tooglePassword()">
+                                            <label class="form-check-label h6 card-subtitle" for="showPassword">
+                                                Show password
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <input type="password" class="form-control" id="password" placeholder="Eg: P@ss123"
-                                        name="password">
-                                    <label class="h6 card-subtitle" for="password">Password</label>
-                                    <div class="form-check mt-1">
-                                        <input class="form-check-input" type="checkbox" id="showPassword"
-                                            onclick="tooglePassword()">
-                                        <label class="form-check-label h6 card-subtitle" for="showPassword">
-                                            Show password
-                                        </label>
+                                <div class="d-grid mt-3">
+                                    <button class="btn btn-secondary font-monospace fw-bold text-uppercase "
+                                        type="button" onclick="showStep3()">Next</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div id="step-3" class="d-none">
+                            <h4 class="card-title my-3">Personalizing Your Settings</h4>
+                            <h6 class="card-subtitle text-muted mb-3">Pick an Avatar & Complete the rest</h6>
+                            <div class="card border-0">
+                                <div class="row g-0">
+                                    <div class="col-md-6">
+                                        <form action="#" class="row">
+                                            <div class="col-12 text-center my-3">
+                                                <img src="/images/avatars/astronaut.svg"
+                                                    class="user-avatars rounded-circle  w-25 img-thumbnail" alt="..."
+                                                    onclick="selectAvatar(this)">
+                                                <img src="/images/avatars/bear.svg"
+                                                    class="user-avatars w-25 rounded-circle img-thumbnail" alt="..."
+                                                    onclick="selectAvatar(this)">
+                                                <img src="/images/avatars/gamer.svg"
+                                                    class="user-avatars rounded-circle w-25 img-thumbnail" alt="..."
+                                                    onclick="selectAvatar(this)">
+                                            </div>
+                                            <div class="col-12 text-center my-3">
+                                                <img src="/images/avatars/ninja.svg"
+                                                    class="user-avatars rounded-circle img-thumbnail w-25" alt="..."
+                                                    onclick="selectAvatar(this)">
+                                                <img src="/images/avatars/girl.svg"
+                                                    class="user-avatars w-25 rounded-circle img-thumbnail" alt="..."
+                                                    onclick="selectAvatar(this)">
+                                                <img src="/images/avatars/school-girl.svg"
+                                                    class="user-avatars rounded-circle w-25 img-thumbnail" alt="..."
+                                                    onclick="selectAvatar(this)">
+                                            </div>
+                                            <div class="col-12 text-center my-3">
+                                                <img src="/images/avatars/call-center-agent.svg"
+                                                    class="user-avatars w-25 rounded-circle img-thumbnail" alt="..."
+                                                    onclick="selectAvatar(this)">
+                                                <img src="/images/avatars/hacker.png"
+                                                    class="user-avatars w-25 rounded-circle img-thumbnail" alt="..."
+                                                    onclick="selectAvatar(this)">
+                                                <img src="/images/avatars/man.svg"
+                                                    class="user-avatars w-25 rounded-circle img-thumbnail" alt="..."
+                                                    onclick="selectAvatar(this)">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <form action="#" class="row">
+                                            <div class="col-12">
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" id="displayName"
+                                                        placeholder="Eg: Suresh Kumar A" name="displayName" autofocus>
+                                                    <label class="h6 card-subtitle" for="displayName">Display
+                                                        Name</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-floating">
+                                                    <select class="form-select" id="accountType"
+                                                        aria-label="Account Type Options">
+                                                        <option value="1" selected>Reader Account</option>
+                                                        <option value="2">Author Account</option>
+                                                    </select>
+                                                    <label class="h6 card-subtitle" for="accountType">Account
+                                                        Type</label>
+                                                </div>
+                                            </div>
+
+                                            <h6 class="card-text my-2 text-muted">By creating an account, you agree to
+                                                our <a href="#" class="card-link">Terms of Service</a></h6>
+                                            <div class="d-grid">
+                                                <button class="btn btn-success font-monospace fw-bold text-uppercase "
+                                                    type="button" onclick="validateData()">Create Account</button>
+                                            </div>
+                                        </form>
+                                        <hr>
+                                        <h6 class="card-text">Already a member? <a href="/login" class="card-link">
+                                                Sign In</a></h6>
                                     </div>
                                 </div>
                             </div>
-
-                            <h6 class="card-text my-2 text-muted">By creating an account, you agree to our <a href="#"
-                                    class="card-link">Terms of Service</a></h6>
-                            <div class="d-grid">
-                                <button class="btn btn-success font-monospace fw-bold text-uppercase " type="button"
-                                    onclick="validateData()">Create Account</button>
-                            </div>
-                        </form>
-
-                        <hr>
-                        <h6 class="card-text">Already a member? <a href="/login" class="card-link">
-                                Sign In</a></h6>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -103,6 +176,36 @@
     <body th:replace="fragments/general :: js"></body>
 
     <script>
+
+        // function toogleUserAvatars(){
+        //     var items=document.getElementsByClassName("user-avatars")
+        //     for(var i=0;i<)
+        // }
+
+        function selectAvatar(item) {
+            var temp = document.getElementsByClassName("user-avatars");
+            for (var i = 0; i < temp.length; i++)
+                temp[i].classList.remove("shadow")
+
+            item.classList.toggle("shadow")
+        }
+
+        function showStep1() {
+            document.getElementById("step-1").classList = ""
+            document.getElementById("step-2").classList = "d-none"
+            document.getElementById("step-3").classList = "d-none"
+        }
+        function showStep2() {
+            document.getElementById("step-1").classList = "d-none"
+            document.getElementById("step-2").classList = ""
+            document.getElementById("step-3").classList = "d-none"
+        }
+        function showStep3() {
+            document.getElementById("step-1").classList = "d-none"
+            document.getElementById("step-2").classList = "d-none"
+            document.getElementById("step-3").classList = ""
+            document.getElementById("create-account-form-card").style.maxWidth="45rem"
+        }
 
         function tooglePassword() {
             var toogleOption = document.getElementById("showPassword");
@@ -157,25 +260,25 @@
             }
 
             // Continue with Account Creation
-            var user = {};
-            user.username = username.value;
-            user.email = email.value;
-            user.password = password.value;
+            // var user = {};
+            // user.username = username.value;
+            // user.email = email.value;
+            // user.password = password.value;
 
-            const postRequestOptions = {
-                method: 'POST',
-                headers: new Headers({ 'content-type': 'application/json' }),
-                body: JSON.stringify(user)
-            };
-            fetch(apiServerUrl + "/create-account", postRequestOptions)
-                .then(response => response.json())
-                .then((data) => {
-                    console.log(data);
-                    showTopSuccessNotificationWithMessageAndAutoReload("Account Created Successfully")
-                })
-                .catch(() => {
-                    showTopErrorNotificationWithMessage("Unable to create account. Try again")
-                })
+            // const postRequestOptions = {
+            //     method: 'POST',
+            //     headers: new Headers({ 'content-type': 'application/json' }),
+            //     body: JSON.stringify(user)
+            // };
+            // fetch(apiServerUrl + "/create-account", postRequestOptions)
+            //     .then(response => response.json())
+            //     .then((data) => {
+            //         console.log(data);
+            //         showTopSuccessNotificationWithMessageAndAutoReload("Account Created Successfully")
+            //     })
+            //     .catch(() => {
+            //         showTopErrorNotificationWithMessage("Unable to create account. Try again")
+            //     })
         }
 
     </script>
