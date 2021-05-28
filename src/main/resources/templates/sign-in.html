@@ -40,15 +40,15 @@
                 </div>
                 <div class="col-md-5">
                     <div class="card-body">
-                        <img src="/images/logo.png" class="card-img" alt="library app logo">
+                        <img src="/images/logo.png" class="w-75" alt="library app logo">
                         <h5 class="card-title text-center">Sign in</h5>
                         <h6 class="card-subtitle text-muted my-1 text-center">Use your account to continue</h6>
                         <form action="/login" method="POST" class="mt-3 row" onsubmit="return validateSignInFormData()">
-                            <div class="col-12">
-                                <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="emailAddress"
-                                        placeholder="Eg: user@gmail.com" name="emailAddress" autofocus>
-                                    <label class="h6 card-subtitle" for="emailAddress">Email address</label>
+                            <div class="col-12 mb-3">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="userName"
+                                        placeholder="Eg: suresh_kumar_a" name="userName" autofocus>
+                                    <label class="h6 card-subtitle" for="userName">Username</label>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -101,17 +101,17 @@
         }
 
         function validateSignInFormData() {
-            var emailAddress = document.getElementById("emailAddress");
+            var userName = document.getElementById("userName");
             var password = document.getElementById("password");
 
-            emailAddress.classList.remove("is-valid", "is-invalid");
+            userName.classList.remove("is-valid", "is-invalid");
             password.classList.remove("is-valid", "is-invalid");
 
 
-            if (validateEmail(emailAddress.value))
-                emailAddress.classList.add("is-valid")
+            if (validateUsername(userName.value))
+                userName.classList.add("is-valid")
             else {
-                emailAddress.classList.add("is-invalid")
+                userName.classList.add("is-invalid")
                 return false;
             }
 

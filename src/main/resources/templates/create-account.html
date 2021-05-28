@@ -27,8 +27,8 @@
             font-family: 'Roboto' !important;
         }
 
-        .custom-width-65 {
-            width: 65% !important;
+        .user-avatars:hover {
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
         }
     </style>
 </head>
@@ -37,139 +37,134 @@
 
     <div class="d-flex justify-content-center align-items-center custom-full-height">
         <!-- Create Account Form Card | Start -->
-        <div class="card p-lg-4 p-md-3" style="max-width: 25rem;" id="create-account-form-card">
+        <div id="step-1-card" class="card px-lg-4 px-md-3" style="max-width: 30rem;">
             <div class="row g-0">
                 <div class="col">
                     <div class="card-body">
-                        <img src="/images/logo.png" class="custom-width-65" alt="library app logo">
-
-                        <div id="step-1" class="step">
-                            <h4 class="card-title my-3">Create Your Account</h4>
-                            <h6 class="card-subtitle text-muted mb-3">Enter the email address you want to use with your
-                                account</h6>
-                            <form action="#" class="row">
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="email" class="form-control" id="emailAddress"
-                                            placeholder="Eg: user@gmail.com" name="emailAddress" autofocus>
-                                        <label class="h6 card-subtitle" for="emailAddress">Email address</label>
-                                    </div>
+                        <img src="/images/logo.png" class="w-50" alt="library app logo">
+                        <h4 class="card-title mt-2">Create Your Account</h4>
+                        <h6 class="card-subtitle text-muted mb-3">Let's Get Started</h6>
+                        <form action="#" class="row">
+                            <div class="col-12 mb-3">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="userName"
+                                        placeholder="Eg: suresh_kumar_a" name="userName" autofocus>
+                                    <label class="h6 card-subtitle" for="userName">Username</label>
                                 </div>
-                                <div class="d-grid mt-3">
-                                    <button class="btn btn-secondary font-monospace fw-bold text-uppercase "
-                                        type="button" onclick="showStep2()">Next</button>
-                                </div>
-                            </form>
-                        </div>
-
-                        <div id="step-2" class="d-none step">
-                            <h4 class="card-title my-3">Choose Your Password</h4>
-                            <h6 class="card-subtitle text-muted mb-3">Enter a secret password you would like to use
-                                for this account.</h6>
-                            <form action="#" class="row">
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="password" class="form-control" id="password"
-                                            placeholder="Eg: P@ss123" name="password">
-                                        <label class="h6 card-subtitle" for="password">Password</label>
-                                        <div class="form-check mt-1">
-                                            <input class="form-check-input" type="checkbox" id="showPassword"
-                                                onclick="tooglePassword()">
-                                            <label class="form-check-label h6 card-subtitle" for="showPassword">
-                                                Show password
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-grid mt-3">
-                                    <button class="btn btn-secondary font-monospace fw-bold text-uppercase "
-                                        type="button" onclick="showStep3()">Next</button>
-                                </div>
-                            </form>
-                        </div>
-
-                        <div id="step-3" class="d-none">
-                            <h4 class="card-title my-3">Personalizing Your Settings</h4>
-                            <h6 class="card-subtitle text-muted mb-3">Pick an Avatar & Complete the rest</h6>
-                            <div class="card border-0">
-                                <div class="row g-0">
-                                    <div class="col-md-6">
-                                        <form action="#" class="row">
-                                            <div class="col-12 text-center my-3">
-                                                <img src="/images/avatars/astronaut.svg"
-                                                    class="user-avatars rounded-circle  w-25 img-thumbnail" alt="..."
-                                                    onclick="selectAvatar(this)">
-                                                <img src="/images/avatars/bear.svg"
-                                                    class="user-avatars w-25 rounded-circle img-thumbnail" alt="..."
-                                                    onclick="selectAvatar(this)">
-                                                <img src="/images/avatars/gamer.svg"
-                                                    class="user-avatars rounded-circle w-25 img-thumbnail" alt="..."
-                                                    onclick="selectAvatar(this)">
-                                            </div>
-                                            <div class="col-12 text-center my-3">
-                                                <img src="/images/avatars/ninja.svg"
-                                                    class="user-avatars rounded-circle img-thumbnail w-25" alt="..."
-                                                    onclick="selectAvatar(this)">
-                                                <img src="/images/avatars/girl.svg"
-                                                    class="user-avatars w-25 rounded-circle img-thumbnail" alt="..."
-                                                    onclick="selectAvatar(this)">
-                                                <img src="/images/avatars/school-girl.svg"
-                                                    class="user-avatars rounded-circle w-25 img-thumbnail" alt="..."
-                                                    onclick="selectAvatar(this)">
-                                            </div>
-                                            <div class="col-12 text-center my-3">
-                                                <img src="/images/avatars/call-center-agent.svg"
-                                                    class="user-avatars w-25 rounded-circle img-thumbnail" alt="..."
-                                                    onclick="selectAvatar(this)">
-                                                <img src="/images/avatars/hacker.png"
-                                                    class="user-avatars w-25 rounded-circle img-thumbnail" alt="..."
-                                                    onclick="selectAvatar(this)">
-                                                <img src="/images/avatars/man.svg"
-                                                    class="user-avatars w-25 rounded-circle img-thumbnail" alt="..."
-                                                    onclick="selectAvatar(this)">
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <form action="#" class="row">
-                                            <div class="col-12">
-                                                <div class="form-floating mb-3">
-                                                    <input type="text" class="form-control" id="displayName"
-                                                        placeholder="Eg: Suresh Kumar A" name="displayName" autofocus>
-                                                    <label class="h6 card-subtitle" for="displayName">Display
-                                                        Name</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-floating">
-                                                    <select class="form-select" id="accountType"
-                                                        aria-label="Account Type Options">
-                                                        <option value="1" selected>Reader Account</option>
-                                                        <option value="2">Author Account</option>
-                                                    </select>
-                                                    <label class="h6 card-subtitle" for="accountType">Account
-                                                        Type</label>
-                                                </div>
-                                            </div>
-
-                                            <h6 class="card-text my-2 text-muted">By creating an account, you agree to
-                                                our <a href="#" class="card-link">Terms of Service</a></h6>
-                                            <div class="d-grid">
-                                                <button class="btn btn-success font-monospace fw-bold text-uppercase "
-                                                    type="button" onclick="validateData()">Create Account</button>
-                                            </div>
-                                        </form>
-                                        <hr>
-                                        <h6 class="card-text">Already a member? <a href="/login" class="card-link">
-                                                Sign In</a></h6>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="password" class="form-control" id="password" placeholder="Eg: P@ss123"
+                                        name="password">
+                                    <label class="h6 card-subtitle" for="password">Password</label>
+                                    <div class="form-check mt-1">
+                                        <input class="form-check-input" type="checkbox" id="showPassword"
+                                            onclick="tooglePassword()">
+                                        <label class="form-check-label h6 card-subtitle" for="showPassword">
+                                            Show password
+                                        </label>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="d-grid mt-3">
+                                <button class="btn btn-success font-monospace fw-bold text-uppercase active"
+                                    type="button" onclick="showStep2()">Next</button>
+                            </div>
+                        </form>
+                        <hr>
+                        <h6 class="card-text">Already a member?
+                            <a href="/login" class="card-link">Sign In</a>
+                        </h6>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div id="step-2-card" class="card px-lg-3 px-md-3 d-none" style="max-width: 25rem;">
+            <div class="row g-0">
+                <div class="col">
+                    <div class="card-body">
+                        <img src="/images/logo.png" class="w-50" alt="library app logo">
+                        <h4 class="card-title mt-2">Personalizing Your Profile</h4>
+                        <h6 class="card-subtitle text-muted mb-3">Pick an Avatar</h6>
+                        <form action="#" class="row">
+                            <div class="col-12 text-center my-2">
+                                <img src="/images/avatars/astronaut.svg"
+                                    class="user-avatars rounded-circle  w-25 img-thumbnail shadow" alt="astronaut"
+                                    onclick="selectAvatar(this)">
+                                <img src="/images/avatars/girl.svg"
+                                    class="user-avatars w-25 rounded-circle img-thumbnail mx-2" alt="girl"
+                                    onclick="selectAvatar(this)">
+                                <img src="/images/avatars/gamer.svg"
+                                    class="user-avatars rounded-circle w-25 img-thumbnail" alt="gamer"
+                                    onclick="selectAvatar(this)">
+                            </div>
+                            <div class="col-12 text-center my-3">
+                                <img src="/images/avatars/ninja.svg"
+                                    class="user-avatars rounded-circle w-25 img-thumbnail" alt="ninja"
+                                    onclick="selectAvatar(this)">
+                                <img src="/images/avatars/hacker.png"
+                                    class="user-avatars w-25 rounded-circle img-thumbnail mx-2" alt="hacker"
+                                    onclick="selectAvatar(this)">
+                                <img src="/images/avatars/man.svg"
+                                    class="user-avatars w-25 rounded-circle img-thumbnail" alt="man"
+                                    onclick="selectAvatar(this)">
+                            </div>
+                            <div class="d-grid mt-3">
+                                <button class="btn btn-success font-monospace fw-bold text-uppercase active"
+                                    type="button" onclick="showStep3()">Next</button>
+                            </div>
+                        </form>
+                        <hr>
+                        <h6 class="card-text">Already a member?
+                            <a href="/login" class="card-link">Sign In</a>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="step-3-card" class="card px-lg-4 px-md-3 d-none" style="max-width: 25rem;">
+            <div class="row g-0">
+                <div class="col">
+                    <div class="card-body">
+                        <img src="/images/logo.png" class="w-50" alt="library app logo">
+                        <h4 class="card-title mt-2">Finalizing Your Settings</h4>
+                        <h6 class="card-subtitle text-muted mb-3">Complete your profile info</h6>
+                        <form action="#" class="row">
+                            <div class="col-12 mb-3">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="emailAddress"
+                                        placeholder="Eg: user@gmail.com" name="emailAddress" autofocus>
+                                    <label class="h6 card-subtitle" for="emailAddress">Email address</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <select class="form-select" id="accountType" aria-label="Account Type Options">
+                                        <option value="1" selected>Reader Account</option>
+                                        <option value="2">Author Account</option>
+                                    </select>
+                                    <label class="h6 card-subtitle" for="accountType">Account
+                                        Type</label>
+                                </div>
+                            </div>
+                            <h6 class="card-text my-2 text-muted">By creating an account, you agree to
+                                our <a href="#" class="card-link">Terms of Service</a></h6>
+                            <div class="d-grid">
+                                <button class="btn btn-success font-monospace fw-bold text-uppercase " type="button"
+                                    onclick="validateData()">Create Account</button>
+                            </div>
+                        </form>
+                        <hr>
+                        <h6 class="card-text">Already a member?
+                            <a href="/login" class="card-link">Sign In</a>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Create Account Form Card | End -->
     </div>
 
@@ -190,21 +185,17 @@
             item.classList.toggle("shadow")
         }
 
-        function showStep1() {
-            document.getElementById("step-1").classList = ""
-            document.getElementById("step-2").classList = "d-none"
-            document.getElementById("step-3").classList = "d-none"
-        }
         function showStep2() {
-            document.getElementById("step-1").classList = "d-none"
-            document.getElementById("step-2").classList = ""
-            document.getElementById("step-3").classList = "d-none"
+            if (validateStep1Form()) {
+                document.getElementById("step-1-card").classList.add("d-none")
+                document.getElementById("step-2-card").classList.remove("d-none")
+                document.getElementById("step-3-card").classList.add("d-none")
+            }
         }
         function showStep3() {
-            document.getElementById("step-1").classList = "d-none"
-            document.getElementById("step-2").classList = "d-none"
-            document.getElementById("step-3").classList = ""
-            document.getElementById("create-account-form-card").style.maxWidth="45rem"
+            document.getElementById("step-1-card").classList.add("d-none")
+            document.getElementById("step-2-card").classList.add("d-none")
+            document.getElementById("step-3-card").classList.remove("d-none")
         }
 
         function tooglePassword() {
@@ -223,30 +214,49 @@
             document.getElementsByTagName("button")[0].disabled = true
         }
 
-        function validateData() {
-
-            disableRegisterButton()
-            var username = document.getElementById("displayName");
+        function validateStep1Form() {
+            var userName = document.getElementById("userName");
             var password = document.getElementById("password");
-            var email = document.getElementById("emailAddress");
 
-            username.classList.remove("is-valid", "is-invalid");
-            email.classList.remove("is-valid", "is-invalid");
+            userName.classList.remove("is-valid", "is-invalid");
             password.classList.remove("is-valid", "is-invalid");
 
 
-            // if (validateUsername(username.value))
-            //     username.classList.add("is-valid")
-            // else {
-            //     username.classList.add("is-invalid")
-            //     showRegisterButton()
-            //     return;
-            // }
-
-            if (validateEmail(email.value))
-                email.classList.add("is-valid")
+            if (validateUsername(userName.value))
+                userName.classList.add("is-valid")
             else {
-                email.classList.add("is-invalid")
+                userName.classList.add("is-invalid")
+                return false;
+            }
+
+            if (validatePassword(password.value))
+                password.classList.add("is-valid")
+            else {
+                password.classList.add("is-invalid")
+                return false;
+            }
+
+            return true;
+        }
+
+
+
+        function validateData() {
+
+            disableRegisterButton()
+            var userName = document.getElementById("userName");
+            var password = document.getElementById("password");
+            var email = document.getElementById("emailAddress");
+
+            userName.classList.remove("is-valid", "is-invalid");
+            password.classList.remove("is-valid", "is-invalid");
+            email.classList.remove("is-valid", "is-invalid");
+
+
+            if (validateUsername(userName.value))
+                userName.classList.add("is-valid")
+            else {
+                userName.classList.add("is-invalid")
                 showRegisterButton()
                 return;
             }
@@ -259,26 +269,35 @@
                 return;
             }
 
-            // Continue with Account Creation
-            // var user = {};
-            // user.username = username.value;
-            // user.email = email.value;
-            // user.password = password.value;
+            if (email.value.length==0 || validateEmail(email.value))
+                email.classList.add("is-valid")
+            else {
+                email.classList.add("is-invalid")
+                showRegisterButton()
+                return;
+            }
 
-            // const postRequestOptions = {
-            //     method: 'POST',
-            //     headers: new Headers({ 'content-type': 'application/json' }),
-            //     body: JSON.stringify(user)
-            // };
-            // fetch(apiServerUrl + "/create-account", postRequestOptions)
-            //     .then(response => response.json())
-            //     .then((data) => {
-            //         console.log(data);
-            //         showTopSuccessNotificationWithMessageAndAutoReload("Account Created Successfully")
-            //     })
-            //     .catch(() => {
-            //         showTopErrorNotificationWithMessage("Unable to create account. Try again")
-            //     })
+
+            // Continue with Account Creation
+            var user = {};
+            user.username = userName.value;
+            user.email = email.value;
+            user.password = password.value;
+
+            const postRequestOptions = {
+                method: 'POST',
+                headers: new Headers({ 'content-type': 'application/json' }),
+                body: JSON.stringify(user)
+            };
+            fetch(apiServerUrl + "/create-account", postRequestOptions)
+                .then(response => response.json())
+                .then((data) => {
+                    console.log(data);
+                    showTopSuccessNotificationWithMessageAndAutoReload("Account Created Successfully")
+                })
+                .catch(() => {
+                    showTopErrorNotificationWithMessage("Unable to create account. Try again")
+                })
         }
 
     </script>

@@ -21,7 +21,7 @@ function onlyAlphaNumeric(inputdata) {
 
 function validateUsername(inputdata) //may contain alphabet or number or its combination - including underscore(_)
 {
-    //username length must be from 2-20
+    //username length must be from 2-15
     if (inputdata.length >= 2 && inputdata.length <= 15) {
         //only alphabets in username
         if (onlyAlphabet(inputdata))
