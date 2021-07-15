@@ -17,10 +17,9 @@
     <div class="container-fluid">
         <div class="row">
 
+            <!-- <div th:replace="fragments/user :: sidebar"></div> -->
 
-            <div th:replace="fragments/user :: sidebar"></div>
-
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <main class="col px-lg-5 px-md-3 px-sm-0">
                 <h1 class="h2 mt-1">View Books || User</h1>
                 <hr>
                 <input type="hidden" name="username" id="username" th:value="${username}">
